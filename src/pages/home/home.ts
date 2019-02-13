@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Study } from "../../models/study";
+// import { Study } from "../../models/study";
 import { StudiesProvider } from "../../providers/studies/studies";
-
+// import {studies} from "../../providers"
 
 @Component({
   selector: 'page-home',
