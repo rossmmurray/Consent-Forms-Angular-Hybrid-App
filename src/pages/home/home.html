@@ -8,128 +8,129 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let study of studiesService.studies">
-      {{study.name}}
-    </ion-item>
-  </ion-list>
-</ion-content>
+
+  <div class="row">
+    <div class="col">
+      <h1>Which study? </h1>
+    </div>
+    <div class="col" align="right">
+      <button ion-button color="primary">Log out</button>
+    </div>
+  </div>
+
+  <div style="background-color: whitesmoke">
+  <ion-slides pager="true">
+
+    <ion-slide *ngFor="let study of studiesService.studies">
+      <div class="swiper-button-prev"></div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title text-wrap style="font-size:50px">{{study.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content text-justify="">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.
+        </ion-card-content>
+      </ion-card>
+      <div class="swiper-button-next"></div>
+    </ion-slide>
+  </ion-slides>
 
 
-<!--&lt;!&ndash;<ion-view title="Choose Study and Forms">&ndash;&gt;-->
-  <!--<ion-content padding="true" class="has-header">-->
-    <!--<ion-list>-->
-      <!--<ion-item *ngFor="let study of studies">-->
-        <!--{{study.name}}-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-
-    <!--<div class="row">-->
-      <!--<div class="col">-->
-        <!--<h1 style="color:#000000;" class="col">Which study? </h1>-->
-      <!--</div>-->
-      <!--<div class="col creator-container"></div>-->
-      <!--<div class="col">-->
-        <!--<a ui-sref="frontlineLogin()" class="button button-positive button-block button-outline padding-left">Log out</a>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider3" delegate-handle="slider3" style="width:100%;height:200px;">&ndash;&gt;-->
-      <!--&lt;!&ndash;<ion-slide-page style="background:url(&quot;https://s3.amazonaws.com/ionic-io-static/gHd5vedGQJu4s4qsPQvr_kitten2.jpg&quot;) no-repeat center;background-size:cover;"></ion-slide-page>&ndash;&gt;-->
-      <!--&lt;!&ndash;<ion-slide-page style="background:url(&quot;https://s3.amazonaws.com/ionic-io-static/WE6rB9dZRTiIWQlP5qsA_kitten3.jpg&quot;) no-repeat center;background-size:cover;"></ion-slide-page>&ndash;&gt;-->
-      <!--&lt;!&ndash;<ion-slide-page style="background:url(&quot;https://s3.amazonaws.com/ionic-io-static/avfsZwJT9WGsBj982ul1_kitten1.jpg&quot;) no-repeat center;background-size:cover;"></ion-slide-page>&ndash;&gt;-->
-    <!--&lt;!&ndash;</ion-slides>&ndash;&gt;-->
-    <!--<div class="spacer" style="width: 748.333px; height: 0px;"></div>-->
-    <!--<div class="show-list-numbers-and-dots">-->
-      <!--<p style="color:#000000;font-size:20px;">Study of topic 1 - - - - - - - - Study of topic 2 - - - - Study of topic 3 Study of topic 4</p>-->
-    <!--</div>-->
-    <!--<h2 style="color:#000000;">Which documents?</h2>-->
-    <!--<div class="row grey">-->
-      <!--<div class="col padding-left padding-right blue">-->
-        <!--<div class="padding">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">-->
-        <!--</div>-->
-        <!--<div style="text-align:center;" class="show-list-numbers-and-dots">-->
-          <!--<p style="color:#000000;font-size:22px;">-->
-            <!--<strong>Info Sheet 1</strong>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col padding-left padding-right blue">-->
-        <!--<div class="padding">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">-->
-        <!--</div>-->
-        <!--<div style="text-align:center;" class="show-list-numbers-and-dots">-->
-          <!--<p style="color:#000000;font-size:22px;">-->
-            <!--<strong>Info Sheet 2</strong>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col padding-left padding-right grey">-->
-        <!--<div class="padding">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">-->
-        <!--</div>-->
-        <!--<div style="text-align:center;" class="show-list-numbers-and-dots">-->
-          <!--<p style="color:#000000;font-size:22px;">-->
-            <!--<strong>Adult Consent Form (italian)</strong>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col padding-left padding-right blue">-->
-        <!--<div class="padding">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">-->
-        <!--</div>-->
-        <!--<div style="text-align:center;" class="show-list-numbers-and-dots">-->
-          <!--<p style="color:#000000;font-size:22px;">-->
-            <!--<strong>Adult Consent Form</strong>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row grey">-->
-      <!--<div class="col padding-left padding-right grey">-->
-        <!--<div class="padding">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">-->
-        <!--</div>-->
-        <!--<div style="text-align:center;" class="show-list-numbers-and-dots">-->
-          <!--<p style="color:#000000;font-size:22px;">-->
-            <!--<strong>Child Assent Form</strong>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col padding-left padding-right grey">-->
-        <!--<div class="padding">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">-->
-        <!--</div>-->
-        <!--<div style="text-align:center;" class="show-list-numbers-and-dots">-->
-          <!--<p style="color:#000000;font-size:22px;">-->
-            <!--<strong>Child Assent Form (Italian)</strong>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="col padding-left padding-right creator-container"></div>-->
-      <!--<div class="col padding-left padding-right grey creator-container"></div>-->
-    <!--</div>-->
-    <!--<h2 style="color:#000000;" class="padding-left">Send read-only copy of these documents via email:</h2>-->
-    <!--<div class="row">-->
-      <!--<div class="col padding">-->
-        <!--<form class="list">-->
-          <!--<label class="item item-input padding">-->
-            <!--<input type="text" placeholder="Enter Email here">-->
-          <!--</label>-->
-        <!--</form>-->
-      <!--</div>-->
-      <!--<div class="col">-->
-        <!--<button style="font-size:40px;" class="button button-positive padding">Send</button>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<h2 style="color:#000000;" class="padding-left">Show these documents to:</h2>-->
-    <!--<div class="row">-->
-      <!--<div class="col padding">-->
-        <!--<a ui-sref="formsReadOnly()" style="font-size:40px;" class="button button-positive button-block button-outline padding">Read</a>-->
-      <!--</div>-->
-      <!--<div class="col padding">-->
-        <!--<a ui-sref="formsFillOut()" style="font-size:40px;" class="button button-positive button-block padding">Fill out</a>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</ion-content>-->
-<!--&lt;!&ndash;</ion-view>&ndash;&gt;-->
+  </div>
+    <div class="spacer" style="width: 748.333px; height: 0px;"></div>
+    <h1>Which documents?</h1>
+    <div class="row grey">
+      <div class="col padding-left padding-right blue">
+        <div class="padding">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+          <p style="color:#000000;font-size:22px;">
+            <strong>Info Sheet 1</strong>
+          </p>
+        </div>
+      </div>
+      <div class="col padding-left padding-right blue">
+        <div class="padding">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+          <p style="color:#000000;font-size:22px;">
+            <strong>Info Sheet 2</strong>
+          </p>
+        </div>
+      </div>
+      <div class="col padding-left padding-right grey">
+        <div class="padding">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+          <p style="color:#000000;font-size:22px;">
+            <strong>Adult Consent Form (italian)</strong>
+          </p>
+        </div>
+      </div>
+      <div class="col padding-left padding-right blue">
+        <div class="padding">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+          <p style="color:#000000;font-size:22px;">
+            <strong>Adult Consent Form</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row grey">
+      <div class="col padding-left padding-right grey">
+        <div class="padding">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+          <p style="color:#000000;font-size:22px;">
+            <strong>Child Assent Form</strong>
+          </p>
+        </div>
+      </div>
+      <div class="col padding-left padding-right grey">
+        <div class="padding">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style="display: block; width: 80%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+          <p style="color:#000000;font-size:22px;">
+            <strong>Child Assent Form (Italian)</strong>
+          </p>
+        </div>
+      </div>
+      <div class="col padding-left padding-right creator-container"></div>
+      <div class="col padding-left padding-right grey creator-container"></div>
+    </div>
+    <h2 style="color:#000000;" class="padding-left">Send read-only copy of these documents via email:</h2>
+    <div class="row">
+      <div class="col padding">
+        <form class="list">
+          <label class="item item-input padding">
+            <input type="text" placeholder="Enter Email here">
+          </label>
+        </form>
+      </div>
+      <div class="col">
+        <button style="font-size:40px;" class="button button-positive padding">Send</button>
+      </div>
+    </div>
+    <h2 style="color:#000000;" class="padding-left">Show these documents to:</h2>
+    <div class="row">
+      <div class="col padding">
+        <a ui-sref="formsReadOnly()" style="font-size:40px;" class="button button-positive button-block button-outline padding">Read</a>
+      </div>
+      <div class="col padding">
+        <a ui-sref="formsFillOut()" style="font-size:40px;" class="button button-positive button-block padding">Fill out</a>
+      </div>
+    </div>
+  </ion-content>
+<!--</ion-view>-->

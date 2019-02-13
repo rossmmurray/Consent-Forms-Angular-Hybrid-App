@@ -1,3 +1,36 @@
 page-home {
 
+  .slide-zoom {
+    // height:200px;
+    height: 100%;
+    // overflow:hidden;
+  }
+
+  ion-slides {
+    //height: 300px;
+    //width: 300px;
+  }
+
+  ion-slide {
+    //height: 300px;
+    //width: 800px !important;
+    padding: 30px 75px 30px 75px;
+
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  ion-card-title {
+    font-size: 40px;
+  }
+
+  ion-card{
+    //display: flex;
+    //flex-direction: column;
+    width: 50px;
+    //margin: 100px;
+    padding-: 100px;
+  }
 }
