@@ -3,6 +3,7 @@ import { NavController, ToastController } from 'ionic-angular';
 // import { Study } from "../../models/study";
 import { StudiesProvider } from "../../providers/studies/studies";
 import { LoginPage } from "../login/login";
+import { DocumentsPage } from "../documents/documents";
 
 @Component({
   selector: 'page-home',
@@ -46,6 +47,10 @@ export class HomePage {
 
   ionViewDidLoad(){
     this.studiesService.load();
+  }
+
+  openDocumentsPage(){
+    this.navCtrl.push(DocumentsPage);
   }
 
 
