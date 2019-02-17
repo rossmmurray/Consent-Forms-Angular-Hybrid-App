@@ -1,21 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { Study } from "../../models/study";
 
-/*
-  Generated class for the StudiesProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-//
-// export class Study {
-//   name: string;
-//
-//   constructor(name: string) {
-//     this.name = name;
-//   }
-// }
-
 
 @Injectable()
 export class StudiesProvider {

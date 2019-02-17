@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-title>
       Choose Study and Forms
     </ion-title>
@@ -14,9 +14,11 @@
       <h1>Which study? </h1>
     </div>
     <div class="col" align="right">
-      <button ion-button color="primary">
-        Log out
-      </button>
+      <form (submit)="LogOut()">
+        <button ion-button color="primary">
+          Log out
+        </button>
+      </form>
     </div>
   </div>
 
@@ -64,17 +66,19 @@
 
   <h1>Send read-only copy of these documents via email:</h1>
 
-  <ion-row>
-    <ion-col col-8>
-      <ion-item>
-        <ion-label position="floating">Email: </ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <button ion-button color="primary" large  block>Send</button>
-    </ion-col>
-  </ion-row>
+  <form (submit)="sendEmail()">
+    <ion-row>
+      <ion-col col-8>
+        <ion-item>
+          <ion-label position="floating">Email: </ion-label>
+          <ion-input type="email" [(ngModel)]="documentEmail" name="email" ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="primary" large  block>Send</button>
+      </ion-col>
+    </ion-row>
+  </form>
 
   <h1>Show these documents to:</h1>
 

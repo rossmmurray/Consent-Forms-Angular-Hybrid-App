@@ -14,3 +14,19 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.myToast{
+  .toast-wrapper {
+    background: color($colors, dark, base);
+    opacity: 0.8;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .toast-message {
+    font-size: 3.0rem;
+    color: white;
+    text-align:center;
+  }
+}
+
+

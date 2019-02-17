@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 // import { Study } from "../../models/study";
 import { StudiesProvider } from "../../providers/studies/studies";
-// import {studies} from "../../providers"
+import { LoginPage } from "../login/login";
 
 @Component({
   selector: 'page-home',
@@ -11,35 +11,42 @@ import { StudiesProvider } from "../../providers/studies/studies";
 })
 export class HomePage {
 
-  // public studies = [];
-  // study1: Study =
+  documentEmail: string;
 
+  constructor(
+    public navCtrl: NavController,
+    public studiesService: StudiesProvider,
+    public toastCtrl: ToastController) {
+  }
 
+  sendEmail() {
 
-  constructor(public navCtrl: NavController, public studiesService: StudiesProvider) {
+    let toast = this.toastCtrl.create({
+      message: "Documents have been sent to " + this.documentEmail,
+      duration: 3000,
+      position: 'middle',
+      cssClass: "myToast"
+    });
 
-    // let study1 = new Study("Affects of Paracetamol on Children with Asthma");
-    // let study2 = new Study('Affects of Cheese on Children with Allergies')
-    // let study3 = new Study('CH343: Calpol on Children with Headaches')
-    // this.studies.push(study1)
+    toast.present();
+  }
 
-    // let study1 = new Study('Affects of Paracetamol on Children with Asthma')
-    // let study2 = new Study('Affects of Cheese on Children with Allergies')
-    // let study3 = new Study('CH343: Calpol on Children with Headaches')
-    // this.studies = [study1, study2, study3];
-    // console.log(this.studies);
+  LogOut(){
+
+    let toast = this.toastCtrl.create({
+      message: "You have been logged out",
+      duration: 1000,
+      position: 'top',
+      cssClass: "myToast"
+    });
+
+    toast.present();
+    this.navCtrl.push(LoginPage);
   }
 
   ionViewDidLoad(){
     this.studiesService.load();
   }
-  //
-  // load(){
-  //   this.studies = [
-  //     {'name': 'Affects of Paracetamol on Children with Asthma'},
-  //     {'name': 'Affects of Cheese on Children with Allergies'},
-  //     {'name': 'CH343: Calpol on Children with Headaches'}
-  //     ]
-  // }
+
 
 }
