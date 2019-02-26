@@ -4,11 +4,12 @@ import { NavController, ToastController } from 'ionic-angular';
 import { StudiesProvider } from "../../providers/studies/studies";
 import { LoginPage } from "../login/login";
 import { DocumentsPage } from "../documents/documents";
+import { StudyDataProvider} from "../../providers/study-data/study-data";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [StudiesProvider]
+  providers: [StudiesProvider, StudyDataProvider]
 })
 export class HomePage {
 
@@ -17,7 +18,8 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public studiesService: StudiesProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public studyDataService: StudyDataProvider) {
   }
 
   sendEmail() {
@@ -47,6 +49,7 @@ export class HomePage {
 
   ionViewDidLoad(){
     this.studiesService.load();
+    this.studyDataService.getStudyData();
   }
 
   openDocumentsPage(){

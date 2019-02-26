@@ -9,6 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { StudiesProvider } from '../providers/studies/studies';
 import { LoginPage } from "../pages/login/login";
 import { DocumentsPage } from "../pages/documents/documents";
+import { StudyDataProvider } from '../providers/study-data/study-data';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { DocumentsPage } from "../pages/documents/documents";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -32,7 +35,8 @@ import { DocumentsPage } from "../pages/documents/documents";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    StudiesProvider
+    StudiesProvider,
+    StudyDataProvider,
   ]
 })
 export class AppModule {}
