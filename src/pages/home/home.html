@@ -24,12 +24,12 @@
 
   <div style="background-color: whitesmoke">
   <ion-slides pager="true">
-    <ion-slide *ngFor="let study of studiesService.studies">
-    <!--<ion-slide *ngFor="let study of studyDataService.studies">-->
+    <!--<ion-slide *ngFor="let study of studiesService.studies">-->
+    <ion-slide *ngFor="let study of studyDataService.studies">
       <div class="swiper-button-prev"></div>
       <ion-card>
         <ion-card-header>
-          <ion-card-title text-wrap style="font-size:50px">{{study.name}}</ion-card-title>
+          <ion-card-title text-wrap style="font-size:50px">{{study.study_name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content text-justify="">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem

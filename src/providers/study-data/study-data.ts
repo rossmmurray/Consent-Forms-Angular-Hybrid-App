@@ -12,6 +12,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class StudyDataProvider {
 
+  studies: any = [];
+
   constructor(public http: HttpClient) {
     console.log('Hello StudyDataProvider Provider');
   }
@@ -19,7 +21,8 @@ export class StudyDataProvider {
   getStudyData() {
 
     this.http.get("http://localhost:3003/studies").subscribe(data => {
-      console.log(data)
+      this.studies = data;
+      // console.log(data)
     });
   }
 
