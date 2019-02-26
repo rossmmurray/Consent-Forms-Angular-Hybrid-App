@@ -12,7 +12,7 @@ import { DocumentsPage } from "../documents/documents";
 })
 export class HomePage {
 
-  documentEmail: string;
+  documentEmail: string = 'example@gmail.com';
 
   constructor(
     public navCtrl: NavController,

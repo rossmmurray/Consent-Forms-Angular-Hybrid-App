@@ -29,4 +29,23 @@
   }
 }
 
+.my-inline-block  > *{
+  display: inline-block;
+  //align: center;
+  //margin-top: 20px;
+}
+
+#doc-page
+{
+  //align-content: center;
+  width:720px; /* or whatever width you want. */
+  //max-width:800px; /* or whatever width you want. */
+  height: 800px;
+  display: inline-block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0px 0px 20px 0px gray;
+  padding: 50px;
+}
+
 

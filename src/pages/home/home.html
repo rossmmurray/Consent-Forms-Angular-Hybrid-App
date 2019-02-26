@@ -7,9 +7,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <div class="row">
+  <div class="row" padding>
     <div class="col">
       <h1>Which study? </h1>
     </div>
@@ -24,7 +24,6 @@
 
   <div style="background-color: whitesmoke">
   <ion-slides pager="true">
-
     <ion-slide *ngFor="let study of studiesService.studies">
       <div class="swiper-button-prev"></div>
       <ion-card>
@@ -43,10 +42,13 @@
       <div class="swiper-button-next"></div>
     </ion-slide>
   </ion-slides>
-
-
   </div>
+
     <div class="spacer" style="width: 748.333px; height: 0px;"></div>
+
+  <div padding>
+
+
     <h1>Which documents?</h1>
 
   <ion-grid>
@@ -82,7 +84,7 @@
 
   <h1>Show these documents to:</h1>
 
-  <!--<form (submit)="openDocumentsPage()">-->
+  <form (submit)="openDocumentsPage()">
     <ion-row>
       <ion-col>
         <button  ion-button outline color="primary" large block>Read</button>
@@ -91,7 +93,8 @@
         <button ion-button color="primary" large  block>Fill Out</button>
       </ion-col>
     </ion-row>
-  <!--</form>-->
+  </form>
+  </div>
 
 
 
