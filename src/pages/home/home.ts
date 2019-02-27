@@ -1,25 +1,39 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
-// import { Study } from "../../models/study";
 import { StudiesProvider } from "../../providers/studies/studies";
 import { LoginPage } from "../login/login";
 import { DocumentsPage } from "../documents/documents";
 import { StudyDataProvider} from "../../providers/study-data/study-data";
+import { Slides } from "ionic-angular";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   providers: [StudiesProvider, StudyDataProvider]
 })
+
 export class HomePage {
 
+  @ViewChild('studySlides') studySlides: Slides;
+
   documentEmail: string = 'example@gmail.com';
+  // currentForms: any = [];
 
   constructor(
     public navCtrl: NavController,
-    public studiesService: StudiesProvider,
     public toastCtrl: ToastController,
     public studyDataService: StudyDataProvider) {
+  }
+
+  showCurrentForms() {
+    let selectedStudy = this.getSelectedStudy();
+    this.studyDataService.getCurrentForms(selectedStudy);
+  }
+
+  getSelectedStudy() {
+    let activeSlide = this.studySlides.getActiveIndex();
+    let activeStudy = this.studyDataService.studies[activeSlide];
+    return activeStudy.study_ID;
   }
 
   sendEmail() {
@@ -48,13 +62,13 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    this.studiesService.load();
     this.studyDataService.getStudyData();
+    this.studyDataService.getFormData();
+
   }
 
   openDocumentsPage(){
     this.navCtrl.push(DocumentsPage);
   }
-
 
 }

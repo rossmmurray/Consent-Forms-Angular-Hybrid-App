@@ -23,7 +23,7 @@
   </div>
 
   <div style="background-color: whitesmoke">
-  <ion-slides pager="true">
+  <ion-slides #studySlides (ionSlideDidChange)="showCurrentForms()" pager="true">
     <!--<ion-slide *ngFor="let study of studiesService.studies">-->
     <ion-slide *ngFor="let study of studyDataService.studies">
       <div class="swiper-button-prev"></div>
@@ -53,7 +53,7 @@
     <h1>Which documents?</h1>
 
   <ion-grid>
-    <div *ngFor="let formRow of studiesService.formsLayout">
+    <div *ngFor="let formRow of studyDataService.formsView">
       <ion-row>
       <ion-col *ngFor="let form of formRow" col-3>
         <div align="center">

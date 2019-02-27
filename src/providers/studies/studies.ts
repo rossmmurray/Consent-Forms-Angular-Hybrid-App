@@ -34,7 +34,7 @@ export class StudiesProvider {
     for (let i = 0; i < this.forms.length; i = i + 4){
       this.formsLayout.push(this.forms.slice(i, i + 4))
     }
-    // console.log(forms)
+    // console.log(allForms)
   }
 
 }
