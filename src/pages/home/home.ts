@@ -26,8 +26,12 @@ export class HomePage {
   }
 
   showCurrentForms() {
+
     let selectedStudy = this.getSelectedStudy();
+
     this.studyDataService.getCurrentForms(selectedStudy);
+    console.log("showing current forms");
+    console.log(selectedStudy);
   }
 
   getSelectedStudy() {
@@ -62,9 +66,9 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
+    // console.log("testing5");
     this.studyDataService.getStudyData();
     this.studyDataService.getFormData();
-
   }
 
   openDocumentsPage(){

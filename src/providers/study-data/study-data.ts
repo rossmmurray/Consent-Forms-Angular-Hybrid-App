@@ -25,10 +25,14 @@ export class StudyDataProvider {
   getFormData() {
 
     this.allForms = [];
+    console.log("Some massive messge");
     this.http.get("http://localhost:3003/forms").subscribe(data => {
       this.allForms = data;
+      console.log("this should be showing all forms:");
+      console.log(this.allForms);
       this.getCurrentForms(1)
     });
+
   }
 
   static getFormLayout(form_array) {
@@ -41,18 +45,22 @@ export class StudyDataProvider {
 
 
   getCurrentForms(study_id) {
+
     this.currentForms = [];
     this.formsView = [];
+    // console.log("all forms");
+    // console.log(this.allForms);
     for (let form of this.allForms) {
-      if (form.study_ID === study_id) {
+      if (form.study_study_ID === study_id) {
+        // console.log(form.study_ID, study_id);
         this.currentForms.push(form)
       }
     }
     this.formsView = StudyDataProvider.getFormLayout(this.currentForms);
+    // console.log("current forms is running now");
+    // console.log(this.formsView);
+    // console.log(this.currentForms);
   }
-
-
-
 
 
 }

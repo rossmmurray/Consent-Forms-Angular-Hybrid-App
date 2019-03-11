@@ -31,21 +31,16 @@
         <ion-card-header>
           <ion-card-title text-wrap style="font-size:50px">{{study.study_name}}</ion-card-title>
         </ion-card-header>
-        <ion-card-content text-justify="">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.
-        </ion-card-content>
+        <!--<ion-card-content text-center="">-->
+          <!--Select forms below-->
+        <!--</ion-card-content>-->
       </ion-card>
       <div class="swiper-button-next"></div>
     </ion-slide>
   </ion-slides>
   </div>
 
-    <div class="spacer" style="width: 748.333px; height: 0px;"></div>
+    <div class="spacer" style="width: 748.333px; height: 0;"></div>
 
   <div padding>
 
@@ -57,10 +52,10 @@
       <ion-row>
       <ion-col *ngFor="let form of formRow" col-3>
         <div align="center">
-          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style=" width: 75%; height: 75%; margin-left: auto; margin-right: auto;">
+          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style=" width: 75%; height: 75%; margin-left: auto; margin-right: auto;" alt="Can't display image">
         </div>
         <div text-center="">
-          <h4>{{form.name}}</h4>
+          <h4>{{form.form_title}}</h4>
         </div>
       </ion-col>
       </ion-row>
@@ -73,7 +68,7 @@
     <ion-row>
       <ion-col col-8>
         <ion-item>
-          <ion-label position="floating">Email: </ion-label>
+          <ion-label>Email: </ion-label>
           <ion-input type="email" [(ngModel)]="documentEmail" name="email" ></ion-input>
         </ion-item>
       </ion-col>
@@ -97,7 +92,4 @@
   </form>
   </div>
 
-
-
-
-
+</ion-content>
