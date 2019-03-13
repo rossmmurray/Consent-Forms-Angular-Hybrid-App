@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 
 
@@ -10,13 +10,17 @@ export class StudyDataProvider {
   allForms: any = [];
   formsView: any = [];
   currentForms: any = [];
+  testFormHTML: any = [];
+  api_base_url = "https://designteam14consentapi.azurewebsites.net";
+  // api_base_url = "http://localhost:3003";
 
   constructor(public http: HttpClient) {
     console.log('Hello StudyDataProvider Provider');
   }
 
+
   getStudyData() {
-    this.http.get("http://localhost:3003/studies").subscribe(data => {
+    this.http.get(this.api_base_url + "/studies").subscribe(data => {
       this.studies = data;
       console.log(data);
     });
@@ -26,13 +30,22 @@ export class StudyDataProvider {
 
     this.allForms = [];
     console.log("Some massive messge");
-    this.http.get("http://localhost:3003/forms").subscribe(data => {
+    this.http.get(this.api_base_url + "/forms").subscribe(data => {
       this.allForms = data;
       console.log("this should be showing all forms:");
       console.log(this.allForms);
       this.getCurrentForms(1)
     });
+  }
 
+  getOneTesFormHTML() {
+    this.testFormHTML = [];
+    this.http.get(this.api_base_url + "/single_form_test").subscribe(data => {
+      this.testFormHTML = data[0].formHTML;
+      // this.testFormHTML = this.testFormHTML[0];
+      console.log(this.testFormHTML);
+
+    });
   }
 
   static getFormLayout(form_array) {
@@ -48,19 +61,15 @@ export class StudyDataProvider {
 
     this.currentForms = [];
     this.formsView = [];
-    // console.log("all forms");
-    // console.log(this.allForms);
     for (let form of this.allForms) {
       if (form.study_study_ID === study_id) {
-        // console.log(form.study_ID, study_id);
         this.currentForms.push(form)
       }
     }
     this.formsView = StudyDataProvider.getFormLayout(this.currentForms);
-    // console.log("current forms is running now");
-    // console.log(this.formsView);
-    // console.log(this.currentForms);
   }
+
+
 
 
 }

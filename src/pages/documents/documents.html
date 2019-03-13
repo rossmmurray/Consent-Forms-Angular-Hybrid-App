@@ -49,68 +49,77 @@
   <div style="background-color: whitesmoke" align="center">
     <div id="doc-page" style="background-color: white" text-left="">
 
-      <div class="grey padding">
-        <div class="padding margin white">
-          <h2 style="color:#000000;text-align:center;">Consent Form for Asthma Study AB101</h2>
-          <div class="show-list-numbers-and-dots">
-            <p style="color:#000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div [innerHTML]="StudyDataService.testFormHTML"></div>
+      <!--{{ StudyDataService.testFormHTML }}-->
 
-            <p style="color:#000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-              irure dolor in </p>
-          </div>
-          <div class="spacer" style="width: 708px; height: 30px;"></div>
-          <form class="list padding">
-            <ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to x ...</ion-toggle>
-            <ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to y ...</ion-toggle>
-            <ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to z ...</ion-toggle>
-          </form>
-          <div class="spacer" style="width: 708px; height: 6px;"></div>
-          <form class="list padding">
-            <label class="item item-input" name="Your Name">
-              <span class="input-label">Parent's Name</span>
-              <input type="text" placeholder="Please type your name here">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Parent's Signature</span>
-              <input type="text" placeholder="____________________________">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Date</span>
-              <input type="text" placeholder="22/01/19">
-            </label>
-          </form>
-          <div class="show-list-numbers-and-dots padding-left">
-            <p style="color:#000000;font-size:20px;">If done, please give back to the clinician to fill out the rest of
-              the form:</p>
-          </div>
-          <form class="list padding">
-            <label class="item item-input" name="Your Name">
-              <span class="input-label">Clinician Name</span>
-              <input type="text" placeholder="Please type your name here">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Clinician Signature</span>
-              <input type="text" placeholder="____________________________">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Date</span>
-              <input type="text" placeholder="22/01/19">
-            </label>
-          </form>
-          <div class="spacer" style="width: 708px; height: 19px;"></div>
-          <div class="show-list-numbers-and-dots">
-            <p style="color:#000000;">boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in boris nisi
-              ut aliquip ex ea commodo consequat. Duis aute irure dolor in boris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in </p>
-          </div>
-        </div>
-      </div>
+
+
+      <!--<div class="grey padding">-->
+        <!--<div class="padding margin white">-->
+
+          <!--<h2 style="color:#000000;text-align:center;">Consent Form for Asthma Study AB101</h2>-->
+          <!--<div class="show-list-numbers-and-dots">-->
+            <!--<p style="color:#000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+              <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
+              <!--laboris nisi ut aliquip ex ea commodo consequat. Duis aute-->
+              <!--irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur-->
+              <!--sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+
+            <!--<p style="color:#000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+              <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
+              <!--laboris nisi ut aliquip ex ea commodo consequat. Duis aute-->
+              <!--irure dolor in </p>-->
+          <!--</div>-->
+          <!--<div class="spacer" style="width: 708px; height: 30px;"></div>-->
+          <!--<form class="list padding">-->
+            <!--<ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to x ...</ion-toggle>-->
+            <!--<ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to y ...</ion-toggle>-->
+            <!--<ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to z ...</ion-toggle>-->
+          <!--</form>-->
+          <!--<div class="spacer" style="width: 708px; height: 6px;"></div>-->
+          <!--<form class="list padding">-->
+            <!--<label class="item item-input" name="Your Name">-->
+              <!--<span class="input-label">Parent's Name</span>-->
+              <!--<input type="text" placeholder="Please type your name here">-->
+            <!--</label>-->
+            <!--<label class="item item-input">-->
+              <!--<span class="input-label">Parent's Signature</span>-->
+              <!--<input type="text" placeholder="____________________________">-->
+            <!--</label>-->
+            <!--<label class="item item-input">-->
+              <!--<span class="input-label">Date</span>-->
+              <!--<input type="text" placeholder="22/01/19">-->
+            <!--</label>-->
+          <!--</form>-->
+          <!--<div class="show-list-numbers-and-dots padding-left">-->
+            <!--<p style="color:#000000;font-size:20px;">If done, please give back to the clinician to fill out the rest of-->
+              <!--the form:</p>-->
+          <!--</div>-->
+          <!--<form class="list padding">-->
+            <!--<label class="item item-input" name="Your Name">-->
+              <!--<span class="input-label">Clinician Name</span>-->
+              <!--<input type="text" placeholder="Please type your name here">-->
+            <!--</label>-->
+            <!--<label class="item item-input">-->
+              <!--<span class="input-label">Clinician Signature</span>-->
+              <!--<input type="text" placeholder="____________________________">-->
+            <!--</label>-->
+            <!--<label class="item item-input">-->
+              <!--<span class="input-label">Date</span>-->
+              <!--<input type="text" placeholder="22/01/19">-->
+            <!--</label>-->
+          <!--</form>-->
+          <!--<div class="spacer" style="width: 708px; height: 19px;"></div>-->
+          <!--<div class="show-list-numbers-and-dots">-->
+            <!--<p style="color:#000000;">boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in boris nisi-->
+              <!--ut aliquip ex ea commodo consequat. Duis aute irure dolor in boris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in </p>-->
+          <!--</div>-->
+
+
+
+        <!--</div>-->
+      <!--</div>-->
     </div>
   </div>
 
@@ -118,17 +127,17 @@
 
 
     <ion-item>
-      <ion-label position="floating">Email: </ion-label>
-      <ion-input type="email" name="email" ></ion-input>
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input type="email" name="email"></ion-input>
     </ion-item>
 
 
-  <h2>The PID is: AB101001</h2>
-  <h3 style="color:#BD0000;">Please note this down before clicking the below button</h3>
-  <div class="spacer" style="width: 728px; height: 12px;"></div>
+    <h2>The PID is: AB101001</h2>
+    <h3 style="color:#BD0000;">Please note this down before clicking the below button</h3>
+    <div class="spacer" style="width: 728px; height: 12px;"></div>
 
     <form>
-      <button  ion-button color="primary" large block><h1>Submit All Forms and Email confirmation</h1></button>
+      <button ion-button color="primary" large block><h1>Submit All Forms and Email confirmation</h1></button>
     </form>
 
     <div class="my-inline-block" align-items-center>

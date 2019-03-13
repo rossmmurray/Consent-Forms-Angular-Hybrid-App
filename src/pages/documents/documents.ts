@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {StudyDataProvider} from "../../providers/study-data/study-data";
 
 /**
  * Generated class for the DocumentsPage page.
@@ -15,11 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DocumentsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public StudyDataService: StudyDataProvider
+  ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentsPage');
+    this.StudyDataService.getOneTesFormHTML();
+    console.log(this.StudyDataService.testFormHTML)
+
   }
 
 }
