@@ -1,0 +1,11 @@
+Issues for Dan:
+&quot is in html
+can't write text in safari
+new lines in html
+
+Todo:
+get api and php on same server
+
+
+use javascript file ionic 3
+

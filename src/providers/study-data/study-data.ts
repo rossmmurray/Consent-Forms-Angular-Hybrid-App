@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
+import {DomSanitizer, SafeHtml, SafeScript} from "@angular/platform-browser";
 
 
 @Injectable()
@@ -11,10 +12,15 @@ export class StudyDataProvider {
   formsView: any = [];
   currentForms: any = [];
   testFormHTML: any = [];
+  safeTestFormHTML: SafeHtml;
+  safeTestScriptHTML: SafeScript;
   api_base_url = "https://designteam14consentapi.azurewebsites.net";
   // api_base_url = "http://localhost:3003";
 
-  constructor(public http: HttpClient) {
+  constructor(
+    public http: HttpClient,
+    public sanitizer: DomSanitizer
+    ) {
     console.log('Hello StudyDataProvider Provider');
   }
 
@@ -38,13 +44,15 @@ export class StudyDataProvider {
     });
   }
 
-  getOneTesFormHTML() {
+  getOneTestFormHTML() {
     this.testFormHTML = [];
     this.http.get(this.api_base_url + "/single_form_test").subscribe(data => {
-      this.testFormHTML = data[0].formHTML;
+      this.testFormHTML = data[0].form_pretty_html;
       // this.testFormHTML = this.testFormHTML[0];
+      console.log(data);
       console.log(this.testFormHTML);
-
+      this.safeTestFormHTML = this.sanitizer.bypassSecurityTrustHtml(this.testFormHTML);
+      this.safeTestScriptHTML = this.sanitizer.bypassSecurityTrustScript(this.testFormHTML)
     });
   }
 

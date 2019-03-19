@@ -49,13 +49,76 @@
   <div style="background-color: whitesmoke" align="center">
     <div id="doc-page" style="background-color: white" text-left="">
 
-      <div [innerHTML]="StudyDataService.testFormHTML"></div>
-      <!--{{ StudyDataService.testFormHTML }}-->
+      <div class="grey padding">
+        <div class="padding margin white">
+
+          <!--{{ StudyDataService.safeTestFormHTML }}-->
+          <!--<iframe [src]="StudyDataService.safeTestFormHTML"></iframe>-->
+
+          <button class="bg-warning" (click)="myFunction()" draggable="true" style="width: 100%; height: 6vh; background-size: 100% 100%;"></button>
+
+          <script>
+
+          function myFunction() {
+            print("hello");
+          }
+
+          </script>
+
+
+          <div [innerHTML]="StudyDataService.safeTestFormHTML"></div>
+          <!--<script [src]="StudyDataService.safeTestScriptHTML"></script>-->
+          <!--<script>-->
+
+            <!--let startpoint;-->
+            <!--function pendown(elem,ev){-->
+              <!--let rect=elem.getBoundingClientRect();-->
+              <!--startpoint=[ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top]-->
+            <!--}-->
+            <!--function draw(elem,ev){-->
+              <!--ctx=elem.getContext("2d");-->
+              <!--let rect=elem.getBoundingClientRect();-->
+              <!--let destination = [ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top];-->
+              <!--ctx.moveTo(startpoint[0],startpoint[1]);-->
+              <!--ctx.lineTo(destination[0],destination[1]);-->
+              <!--ctx.stroke();-->
+              <!--startpoint[0]=destination[0];-->
+              <!--startpoint[1]=destination[1];-->
+            <!--}-->
+          <!--</script>-->
 
 
 
-      <!--<div class="grey padding">-->
-        <!--<div class="padding margin white">-->
+
+          <form (submit)="draw()">
+                <button ion-button color="primary" large  block>HELLO</button>
+          </form>
+
+          <!--<canvas  height="100px"  #myCanvas style="border-style: solid; border-color: rgb(0, 123, 255);"></canvas>-->
+
+          <!--<canvas width="800px" height="100px" (ontouchmove)="draw()" style="border-style: solid; border-color: rgb(0, 123, 255); background-color: white;" id=""></canvas>-->
+
+
+
+          <!--other info-->
+          <!--<script>-->
+
+            <!--let startpoint;-->
+            <!--function pendown(elem,ev){-->
+              <!--let rect=elem.getBoundingClientRect();-->
+              <!--startpoint=[ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top]-->
+            <!--}-->
+            <!--function draw(elem,ev){-->
+              <!--ctx=elem.getContext("2d");-->
+              <!--let rect=elem.getBoundingClientRect();-->
+              <!--let destination = [ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top];-->
+              <!--ctx.moveTo(startpoint[0],startpoint[1]);-->
+              <!--ctx.lineTo(destination[0],destination[1]);-->
+              <!--ctx.stroke();-->
+              <!--startpoint[0]=destination[0];-->
+              <!--startpoint[1]=destination[1];-->
+            <!--}-->
+          <!--</script>-->
 
           <!--<h2 style="color:#000000;text-align:center;">Consent Form for Asthma Study AB101</h2>-->
           <!--<div class="show-list-numbers-and-dots">-->
@@ -118,8 +181,8 @@
 
 
 
-        <!--</div>-->
-      <!--</div>-->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -147,4 +210,7 @@
 
 
   </div>
+
+
+
 </ion-content>
