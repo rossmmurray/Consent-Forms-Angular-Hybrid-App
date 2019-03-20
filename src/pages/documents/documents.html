@@ -55,6 +55,8 @@
           <!--{{ StudyDataService.safeTestFormHTML }}-->
           <!--<iframe [src]="StudyDataService.safeTestFormHTML"></iframe>-->
 
+
+
           <button class="bg-warning" (click)="myFunction()" draggable="true" style="width: 100%; height: 6vh; background-size: 100% 100%;"></button>
 
           <script>
@@ -64,6 +66,10 @@
           }
 
           </script>
+
+          <canvas width="800px" height="100px" (touchmove)="draw(this,event)" draggable="true" ondragstart="this.id=&quot;draggedthing&quot;" ondragend="this.id=&quot;&quot;" style="border-style: solid; border-color: rgb(0, 123, 255); background-color: white;" id=""></canvas>
+
+
 
 
           <div [innerHTML]="StudyDataService.safeTestFormHTML"></div>
