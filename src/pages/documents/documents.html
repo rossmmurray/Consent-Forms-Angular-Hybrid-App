@@ -52,90 +52,61 @@
       <div class="grey padding">
         <div class="padding margin white">
 
-          <div class="title">Please draw your Signature</div>
+          <!--Signature-->
           <ion-row [ngClass]="{'drawing-active': isDrawing}">
-            <ion-col></ion-col>
-            <ion-col>
-              <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
-                             (onEndEvent)="drawComplete()"></signature-pad>
+            <ion-col class="signature_pad">
+              <signature-pad  [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
             </ion-col>
-            <ion-col></ion-col>
-
+            <ion-col>
+              <button ion-button large color="danger" (click)="clearPad()">Clear</button>
+            </ion-col>
           </ion-row>
-          <button ion-button full color="danger" (click)="clearPad()">Clear</button>
-          <button ion-button full color="secondary" (click)="savePad()">Save</button>
+
+          <!--Toggle-->
+          <ion-item>
+            <ion-label>Click the toggle if you agree to x ...</ion-label>
+            <ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>
+          </ion-item>
+
+          <!--Paragraph-->
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+
+          <!--Input-->
+          <ion-item>
+            <ion-label position="fixed">Enter something</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+
+          <!--Button-->
           <ion-row>
 
-            <ion-row>
-              <ion-col></ion-col>
-              <ion-col width-80>
-                <img [src]="signature"/>
+              <ion-col>
+                <h1>Press this button if you feel ok taking part in the trial</h1>
               </ion-col>
-              <ion-col></ion-col>
-            </ion-row>
+
+            <ion-col>
+              <button color="secondary" outline icon-only ion-button  class="smiley_button" block >
+                <p>☺︎</p>
+              </button>
+
+            </ion-col>
 
 
-            <!--{{ StudyDataService.safeTestFormHTML }}-->
-            <!--<iframe [src]="StudyDataService.safeTestFormHTML"></iframe>-->
 
 
-            <!--<canvas width="800px" height="100px" (touchmove)="draw(this,event)" draggable="true" ondragstart="this.id=&quot;draggedthing&quot;" ondragend="this.id=&quot;&quot;" style="border-style: solid; border-color: rgb(0, 123, 255); background-color: white;" id=""></canvas>-->
+          </ion-row>
 
 
-            <!--<div [innerHTML]="StudyDataService.safeTestFormHTML"></div>-->
-            <!--<script [src]="StudyDataService.safeTestScriptHTML"></script>-->
-            <!--<script>-->
 
-            <!--let startpoint;-->
-            <!--function pendown(elem,ev){-->
-            <!--let rect=elem.getBoundingClientRect();-->
-            <!--startpoint=[ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top]-->
-            <!--}-->
-            <!--function draw(elem,ev){-->
-            <!--ctx=elem.getContext("2d");-->
-            <!--let rect=elem.getBoundingClientRect();-->
-            <!--let destination = [ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top];-->
-            <!--ctx.moveTo(startpoint[0],startpoint[1]);-->
-            <!--ctx.lineTo(destination[0],destination[1]);-->
-            <!--ctx.stroke();-->
-            <!--startpoint[0]=destination[0];-->
-            <!--startpoint[1]=destination[1];-->
-            <!--}-->
-            <!--</script>-->
-
-
-            <!--<canvas  height="100px"  #myCanvas style="border-style: solid; border-color: rgb(0, 123, 255);"></canvas>-->
-
-            <!--<canvas width="800px" height="100px" (ontouchmove)="draw()" style="border-style: solid; border-color: rgb(0, 123, 255); background-color: white;" id=""></canvas>-->
-
-
-            <!--other info-->
-            <!--<script>-->
-
-            <!--let startpoint;-->
-            <!--function pendown(elem,ev){-->
-            <!--let rect=elem.getBoundingClientRect();-->
-            <!--startpoint=[ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top]-->
-            <!--}-->
-            <!--function draw(elem,ev){-->
-            <!--ctx=elem.getContext("2d");-->
-            <!--let rect=elem.getBoundingClientRect();-->
-            <!--let destination = [ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top];-->
-            <!--ctx.moveTo(startpoint[0],startpoint[1]);-->
-            <!--ctx.lineTo(destination[0],destination[1]);-->
-            <!--ctx.stroke();-->
-            <!--startpoint[0]=destination[0];-->
-            <!--startpoint[1]=destination[1];-->
-            <!--}-->
-            <!--</script>-->
 
             <!--<h2 style="color:#000000;text-align:center;">Consent Form for Asthma Study AB101</h2>-->
             <!--<div class="show-list-numbers-and-dots">-->
-            <!--<p style="color:#000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
-            <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
-            <!--laboris nisi ut aliquip ex ea commodo consequat. Duis aute-->
-            <!--irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur-->
-            <!--sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+
 
             <!--<p style="color:#000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
             <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
@@ -144,7 +115,7 @@
             <!--</div>-->
             <!--<div class="spacer" style="width: 708px; height: 30px;"></div>-->
             <!--<form class="list padding">-->
-            <!--<ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to x ...</ion-toggle>-->
+
             <!--<ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to y ...</ion-toggle>-->
             <!--<ion-toggle toggle-class="toggle-positive">Click the toggle if you agree to z ...</ion-toggle>-->
             <!--</form>-->

@@ -4,6 +4,7 @@ import {StudyDataProvider} from "../../providers/study-data/study-data";
 import {DomSanitizer} from "@angular/platform-browser";
 import { SignaturePad } from "angular2-signaturepad/signature-pad";
 import {Storage} from "@ionic/storage";
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the DocumentsPage page.
@@ -24,9 +25,9 @@ export class DocumentsPage {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-    'minWidth': 5,
+    // 'minWidth': 5,
     'canvasWidth': 500,
-    'canvasHeight': 300
+    'canvasHeight': 100
   };
 
   constructor(
@@ -34,19 +35,16 @@ export class DocumentsPage {
     public navParams: NavParams,
     public StudyDataService: StudyDataProvider,
     public sanitizer: DomSanitizer,
-    public storage: Storage
+    public storage: Storage,
+    public toastCtrl: ToastController
   ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentsPage');
-    this.signaturePad.set('minWidth', 5);
-    this.signaturePad.clear();
+    // this.signaturePad.set('minWidth', 5);
+    // this.signaturePad.clear();
+    // this.canvasResize()
 
-    // this.StudyDataService.getOneTestFormHTML();
-    // // the below logs don't do anything
-    // console.log("here's the document.ts page showing the testFormHTML");
-    // console.log(this.StudyDataService.testFormHTML);
-    // console.log("above is where it was happening");
   }
 
   ionViewDidEnter() {
@@ -66,31 +64,32 @@ export class DocumentsPage {
     console.log('begin drawing');
   }
 
-  // ngAfterViewInit(): void {
-  //   this.context = (<HTMLCanvasElement>this.myCanvas.nativeElement).getContext('2d');
+  savePad() {
+    this.signature = this.signaturePad.toDataURL();
+    this.storage.set('savedSignature', this.signature);
+    this.signaturePad.clear();
+    let toast = this.toastCtrl.create({
+      message: 'New Signature saved.',
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  clearPad() {
+    this.signaturePad.clear();
+  }
+
+  // canvasResize() {
+  //   console.log("resizing canvas")
+  //   let canvas = document.querySelector('canvas');
+  //   console.log(canvas);
+  //   this.signaturePad.set('minWidth', 1);
+  //   this.signaturePad.set('canvasWidth', canvas.offsetWidth);
+  //   this.signaturePad.set('canvasHeight', canvas.offsetHeight);
   // }
 
 
-  // var startpoint;
-  // pendown(elem,ev){
-  //   let rect=elem.getBoundingClientRect();
-  //   this.startpoint=[ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top]
-  // }
 
-  // draw(elem,ev){
-  //   let ctx=elem.getContext("2d");
-  //   let rect=elem.getBoundingClientRect();
-  //   let destination = [ev.targetTouches[0].pageX-rect.left,ev.targetTouches[0].pageY-rect.top];
-  //   ctx.moveTo(this.startpoint[0],this.startpoint[1]);
-  //   ctx.lineTo(destination[0],destination[1]);
-  //   ctx.stroke();
-  //   this.startpoint[0]=destination[0];
-  //   this.startpoint[1]=destination[1];
-  //   console.log("hello");
-  // }
 
-  // myFunction() {
-  //   console.log("Here is the button being clicked")
-  // }
 
 }
