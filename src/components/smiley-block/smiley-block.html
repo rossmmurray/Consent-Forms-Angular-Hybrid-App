@@ -1,10 +1,10 @@
 <ion-row>
   <ion-col>
-    <h1>Press this button if you want to take part in the trial ➜︎</h1>
+    <h1>{{smileyText}}</h1>
   </ion-col>
   <ion-col>
-    <button color="secondary" outline icon-only ion-button class="smiley_button" block>
-      <p>☺︎</p>
+    <button (click)="toggleSmiley()" color="secondary" outline icon-only ion-button class="smiley_button" block>
+      <p>{{buttonIcon}}</p>
     </button>
   </ion-col>
 </ion-row>
