@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {StudyDataProvider} from "../../providers/study-data/study-data";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -44,6 +44,8 @@ export class DocumentsPage {
     // this.signaturePad.set('minWidth', 5);
     // this.signaturePad.clear();
     // this.canvasResize()
+    // let canvas = this.myCanvas.toArray()[i].nativeElement;
+    console.log(this.signaturePad);
 
   }
 
