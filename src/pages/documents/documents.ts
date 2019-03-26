@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+import {Component, ViewChild, ElementRef, ViewChildren, QueryList} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {StudyDataProvider} from "../../providers/study-data/study-data";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -21,8 +21,9 @@ import { ToastController } from 'ionic-angular';
 export class DocumentsPage {
   signature = '';
   isDrawing = false;
+  signaturePad;
 
-  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  @ViewChildren(SignaturePad) signaturePadKids: QueryList<SignaturePad>;
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     // 'minWidth': 5,
@@ -45,12 +46,13 @@ export class DocumentsPage {
     // this.signaturePad.clear();
     // this.canvasResize()
     // let canvas = this.myCanvas.toArray()[i].nativeElement;
-    console.log(this.signaturePad);
+    console.log(this.signaturePadKids);
+    this.signaturePad = this.signaturePadKids.last
 
   }
 
   ionViewDidEnter() {
-    this.signaturePad.clear()
+    this.signaturePad.clear();
     this.storage.get('savedSignature').then((data) => {
       this.signature = data;
     });
@@ -77,8 +79,10 @@ export class DocumentsPage {
     toast.present();
   }
 
-  clearPad() {
+  clearPad(event: any) {
     this.signaturePad.clear();
+    console.log(this.signaturePadKids);
+    console.log(event);
   }
 
   // canvasResize() {

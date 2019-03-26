@@ -58,7 +58,7 @@
               <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
             </ion-col>
             <ion-col>
-              <button ion-button large color="danger" (click)="clearPad()">Clear</button>
+              <button ion-button large color="danger" (click)="clearPad($event)">Clear</button>
               <button ion-button full color="secondary" (click)="savePad()">Save</button>
             </ion-col>
           </ion-row>
@@ -75,7 +75,7 @@
               <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
             </ion-col>
             <ion-col>
-              <button ion-button large color="danger" (click)="clearPad()">Clear</button>
+              <button ion-button large color="danger" (click)="clearPad($event)">Clear</button>
               <button ion-button full color="secondary" (click)="savePad()">Save</button>
             </ion-col>
           </ion-row>
