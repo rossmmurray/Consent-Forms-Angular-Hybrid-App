@@ -11,6 +11,7 @@ import { LoginPage } from "../pages/login/login";
 import { DocumentsPage } from "../pages/documents/documents";
 import { StudyDataProvider } from '../providers/study-data/study-data';
 import { HttpClientModule } from "@angular/common/http";
+import { SignaturePadModule} from "angular2-signaturepad";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from "@angular/common/http";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    SignaturePadModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
