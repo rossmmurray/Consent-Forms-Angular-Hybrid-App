@@ -1,0 +1,18 @@
+<!-- Generated template for the SigBlockComponent component -->
+
+<!--Signature-->
+<ion-row [ngClass]="{'drawing-active': isDrawing}">
+  <ion-col class="signature_pad">
+    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+  </ion-col>
+  <ion-col>
+    <button ion-button block color="danger" (click)="clearPad($event)">Clear</button>
+    <button ion-button block color="secondary" (click)="savePad()">Save</button>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col width-80>
+    <img [src]="signature"/>
+  </ion-col>
+</ion-row>

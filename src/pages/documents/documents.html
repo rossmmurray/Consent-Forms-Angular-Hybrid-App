@@ -52,39 +52,43 @@
       <div class="grey padding">
         <div class="padding margin white">
 
-          <!--Signature-->
-          <ion-row [ngClass]="{'drawing-active': isDrawing}">
-            <ion-col class="signature_pad">
-              <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
-            </ion-col>
-            <ion-col>
-              <button ion-button large color="danger" (click)="clearPad($event)">Clear</button>
-              <button ion-button full color="secondary" (click)="savePad()">Save</button>
-            </ion-col>
-          </ion-row>
+          <form-sections-sig-block></form-sections-sig-block>
 
-          <ion-row>
-            <ion-col width-80>
-              <img [src]="signature"/>
-            </ion-col>
-          </ion-row>
+          <form-sections-sig-block></form-sections-sig-block>
 
-          <!--Signature-->
-          <ion-row [ngClass]="{'drawing-active': isDrawing}">
-            <ion-col class="signature_pad">
-              <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
-            </ion-col>
-            <ion-col>
-              <button ion-button large color="danger" (click)="clearPad($event)">Clear</button>
-              <button ion-button full color="secondary" (click)="savePad()">Save</button>
-            </ion-col>
-          </ion-row>
+          <!--&lt;!&ndash;Signature&ndash;&gt;-->
+          <!--<ion-row [ngClass]="{'drawing-active': isDrawing}">-->
+            <!--<ion-col class="signature_pad">-->
+              <!--<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<button ion-button large color="danger" (click)="clearPad($event)">Clear</button>-->
+              <!--<button ion-button full color="secondary" (click)="savePad()">Save</button>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
 
-          <ion-row>
-            <ion-col width-80>
-              <img [src]="signature"/>
-            </ion-col>
-          </ion-row>
+          <!--<ion-row>-->
+            <!--<ion-col width-80>-->
+              <!--<img [src]="signature"/>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+
+          <!--&lt;!&ndash;Signature&ndash;&gt;-->
+          <!--<ion-row [ngClass]="{'drawing-active': isDrawing}">-->
+            <!--<ion-col class="signature_pad">-->
+              <!--<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<button ion-button large color="danger" (click)="clearPad($event)">Clear</button>-->
+              <!--<button ion-button full color="secondary" (click)="savePad()">Save</button>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+
+          <!--<ion-row>-->
+            <!--<ion-col width-80>-->
+              <!--<img [src]="signature"/>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
 
           <!--Toggle-->
           <ion-item>

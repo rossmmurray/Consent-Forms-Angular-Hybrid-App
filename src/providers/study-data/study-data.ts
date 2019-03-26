@@ -47,7 +47,7 @@ export class StudyDataProvider {
   getOneTestFormHTML() {
     this.testFormHTML = [];
     this.http.get(this.api_base_url + "/single_form_test").subscribe(data => {
-      this.testFormHTML = data[0].form_pretty_html;
+      // this.testFormHTML = data[0].form_pretty_html;
       // this.testFormHTML = this.testFormHTML[0];
       console.log(data);
       console.log(this.testFormHTML);

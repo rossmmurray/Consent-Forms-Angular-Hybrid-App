@@ -13,13 +13,15 @@ import { StudyDataProvider } from '../providers/study-data/study-data';
 import { HttpClientModule } from "@angular/common/http";
 import { SignaturePadModule} from "angular2-signaturepad";
 import {IonicStorageModule} from "@ionic/storage";
+import { SigBlockComponent} from "../components/sig-block/sig-block";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    DocumentsPage
+    DocumentsPage,
+    SigBlockComponent
   ],
   imports: [
     BrowserModule,
