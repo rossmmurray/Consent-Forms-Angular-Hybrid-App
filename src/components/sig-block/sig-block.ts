@@ -5,7 +5,7 @@ import { ToastController} from "ionic-angular";
 
 
 @Component({
-  selector: 'form-sections-sig-block',
+  selector: 'sig-block',
   templateUrl: 'sig-block.html'
 })
 export class SigBlockComponent {

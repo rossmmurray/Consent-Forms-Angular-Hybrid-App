@@ -14,6 +14,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { SignaturePadModule} from "angular2-signaturepad";
 import {IonicStorageModule} from "@ionic/storage";
 import { SigBlockComponent} from "../components/sig-block/sig-block";
+import {SmileyBlockComponent} from "../components/smiley-block/smiley-block";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SigBlockComponent} from "../components/sig-block/sig-block";
     HomePage,
     LoginPage,
     DocumentsPage,
-    SigBlockComponent
+    SigBlockComponent,
+    SmileyBlockComponent
   ],
   imports: [
     BrowserModule,

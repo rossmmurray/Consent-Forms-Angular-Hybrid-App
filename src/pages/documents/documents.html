@@ -52,43 +52,10 @@
       <div class="grey padding">
         <div class="padding margin white">
 
-          <form-sections-sig-block></form-sections-sig-block>
+          <sig-block></sig-block>
 
-          <form-sections-sig-block></form-sections-sig-block>
+          <sig-block></sig-block>
 
-          <!--&lt;!&ndash;Signature&ndash;&gt;-->
-          <!--<ion-row [ngClass]="{'drawing-active': isDrawing}">-->
-            <!--<ion-col class="signature_pad">-->
-              <!--<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>-->
-            <!--</ion-col>-->
-            <!--<ion-col>-->
-              <!--<button ion-button large color="danger" (click)="clearPad($event)">Clear</button>-->
-              <!--<button ion-button full color="secondary" (click)="savePad()">Save</button>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
-
-          <!--<ion-row>-->
-            <!--<ion-col width-80>-->
-              <!--<img [src]="signature"/>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
-
-          <!--&lt;!&ndash;Signature&ndash;&gt;-->
-          <!--<ion-row [ngClass]="{'drawing-active': isDrawing}">-->
-            <!--<ion-col class="signature_pad">-->
-              <!--<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>-->
-            <!--</ion-col>-->
-            <!--<ion-col>-->
-              <!--<button ion-button large color="danger" (click)="clearPad($event)">Clear</button>-->
-              <!--<button ion-button full color="secondary" (click)="savePad()">Save</button>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
-
-          <!--<ion-row>-->
-            <!--<ion-col width-80>-->
-              <!--<img [src]="signature"/>-->
-            <!--</ion-col>-->
-          <!--</ion-row>-->
 
           <!--Toggle-->
           <ion-item>
@@ -111,16 +78,9 @@
           </ion-item>
 
           <!--Button-->
-          <ion-row>
-            <ion-col>
-              <h1>Press this button if you feel ok taking part in the trial</h1>
-            </ion-col>
-            <ion-col>
-              <button color="secondary" outline icon-only ion-button class="smiley_button" block>
-                <p>☺︎</p>
-              </button>
-            </ion-col>
-          </ion-row>
+          <smiley-block></smiley-block>
+
+          <smiley-block></smiley-block>
 
         </div>
       </div>
