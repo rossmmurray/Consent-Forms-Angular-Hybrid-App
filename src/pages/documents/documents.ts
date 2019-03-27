@@ -17,11 +17,13 @@ export class DocumentsPage {
     public navParams: NavParams,
     public StudyDataService: StudyDataProvider,
     public sanitizer: DomSanitizer,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public studyDataService: StudyDataProvider
   ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentsPage');
+    this.studyDataService.getOneTestFormHTML();
   }
 
 }
