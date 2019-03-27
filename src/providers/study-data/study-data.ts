@@ -58,7 +58,7 @@ export class StudyDataProvider {
 
       console.log(this.allSections);
       for (let section of this.allSections) {
-        let section_display = new FormDisplay(section.content, section.order, section.section_type, this.sanitizer);
+        let section_display = new FormDisplay(section.content, section.order, section.section_type);
         // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
         this.section_array[section_display.section_order] = section_display;
       }

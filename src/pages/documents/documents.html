@@ -64,9 +64,12 @@
           <div *ngFor="let section of studyDataService.section_array">
 
             <div ngSwitch="{{section.type_id}}">
+
               <sig-block *ngSwitchCase="'<ca'"></sig-block>
               <smiley-block *ngSwitchCase="'<bu'"></smiley-block>
               <div *ngSwitchCase="'<p>'"><div [innerHTML]="section.html_display"></div></div>
+              <ion-item *ngSwitchCase="'<di'"><ion-label>{{section.section_text}}</ion-label><ion-checkbox></ion-checkbox></ion-item>
+
             </div>
 
           </div>
