@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {DomSanitizer, SafeHtml, SafeScript} from "@angular/platform-browser";
+import {FormDisplay} from "../../models/form-display";
 
 
 @Injectable()
@@ -16,6 +17,7 @@ export class StudyDataProvider {
   safeTestScriptHTML: SafeScript;
   api_base_url = "https://designteam14consentapi.azurewebsites.net";
   allSections: any = [];
+  section_array: any = [];
   // api_base_url = "http://localhost:3003";
 
   constructor(
@@ -46,20 +48,36 @@ export class StudyDataProvider {
   }
 
   getOneTestFormHTML() {
+
+
     this.testFormHTML = [];
+    this.section_array = [];
     this.http.get(this.api_base_url + "/single_form_test").subscribe(data => {
+
       this.allSections = data;
+
       console.log(this.allSections);
       for (let section of this.allSections) {
-        console.log(section);
+        let section_display = new FormDisplay(section.content, section.order, section.section_type, this.sanitizer);
+        // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
+        this.section_array[section_display.section_order] = section_display;
       }
+
+      console.log(this.section_array);
+
+      // content: "<p>This is an example of a paragraph.</p>"
+      // form_form_ID: 6
+      // formsection_ID: 1
+      // order: "0"
+      // section_type: "<p>"
+
 
       // this.testFormHTML = data[0].form_pretty_html;
       // this.testFormHTML = this.testFormHTML[0];
-      console.log(data);
-      console.log(this.testFormHTML);
-      this.safeTestFormHTML = this.sanitizer.bypassSecurityTrustHtml(this.testFormHTML);
-      this.safeTestScriptHTML = this.sanitizer.bypassSecurityTrustScript(this.testFormHTML)
+      // console.log(data);
+      // console.log(this.testFormHTML);
+      // this.safeTestFormHTML = this.sanitizer.bypassSecurityTrustHtml(this.testFormHTML);
+      // this.safeTestScriptHTML = this.sanitizer.bypassSecurityTrustScript(this.testFormHTML)
     });
   }
 

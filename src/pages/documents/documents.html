@@ -61,36 +61,47 @@
           <br>
 
 
+          <div *ngFor="let section of studyDataService.section_array">
 
-          <sig-block></sig-block>
+            <div ngSwitch="{{section.type_id}}">
+              <sig-block *ngSwitchCase="'<ca'"></sig-block>
+              <smiley-block *ngSwitchCase="'<bu'"></smiley-block>
+              <div *ngSwitchCase="'<p>'"><div [innerHTML]="section.html_display"></div></div>
+            </div>
 
-          <sig-block></sig-block>
+          </div>
 
 
-          <!--Toggle-->
-          <ion-item>
-            <ion-label>Click the toggle if you agree to x ...</ion-label>
-            <ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>
-          </ion-item>
 
-          <!--Paragraph-->
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <!--<sig-block></sig-block>-->
 
-          <!--Input-->
-          <ion-item>
-            <ion-label position="fixed">Enter something</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
+          <!--<sig-block></sig-block>-->
 
-          <!--Button-->
-          <smiley-block></smiley-block>
 
-          <smiley-block></smiley-block>
+          <!--&lt;!&ndash;Toggle&ndash;&gt;-->
+          <!--<ion-item>-->
+            <!--<ion-label>Click the toggle if you agree to x ...</ion-label>-->
+            <!--<ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>-->
+          <!--</ion-item>-->
+
+          <!--&lt;!&ndash;Paragraph&ndash;&gt;-->
+          <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+            <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
+            <!--laboris nisi ut aliquip ex ea commodo consequat. Duis aute-->
+            <!--irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur-->
+            <!--sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
+          <!--</p>-->
+
+          <!--&lt;!&ndash;Input&ndash;&gt;-->
+          <!--<ion-item>-->
+            <!--<ion-label position="fixed">Enter something</ion-label>-->
+            <!--<ion-input></ion-input>-->
+          <!--</ion-item>-->
+
+          <!--&lt;!&ndash;Button&ndash;&gt;-->
+          <!--<smiley-block></smiley-block>-->
+
+          <!--<smiley-block></smiley-block>-->
 
         </div>
       </div>
