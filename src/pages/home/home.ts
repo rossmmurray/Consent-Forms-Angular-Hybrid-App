@@ -14,7 +14,9 @@ import { Slides } from "ionic-angular";
 
 export class HomePage {
 
+
   @ViewChild('studySlides') studySlides: Slides;
+
 
   documentEmail: string = 'example@gmail.com';
   // currentForms: any = [];
@@ -22,8 +24,9 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public toastCtrl: ToastController,
-    public studyDataService: StudyDataProvider) {
-  }
+    public studyDataService: StudyDataProvider,
+  ) {}
+
 
   showCurrentForms() {
 

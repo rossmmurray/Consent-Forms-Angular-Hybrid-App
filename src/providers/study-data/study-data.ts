@@ -33,6 +33,7 @@ export class StudyDataProvider {
       this.studies = data;
       console.log(data);
     });
+
   }
 
   getFormData() {
