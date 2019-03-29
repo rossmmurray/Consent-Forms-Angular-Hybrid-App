@@ -3,12 +3,14 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {DomSanitizer, SafeHtml, SafeScript} from "@angular/platform-browser";
 import {FormDisplay} from "../../models/form-display";
+import {Form} from "../../models/form";
+import {Study} from "../../models/study";
 
 
 @Injectable()
 export class StudyDataProvider {
 
-  studies: any = [];
+  studies: Study[] = [];
   allForms: any = [];
   formsView: any = [];
   currentForms: any = [];
@@ -27,30 +29,52 @@ export class StudyDataProvider {
     console.log('Hello StudyDataProvider Provider');
   }
 
-
-  getStudyData() {
+  getStudyMetaData() {
+    // get top level data for all studies
+    this.studies = [];
     this.http.get(this.api_base_url + "/studies").subscribe(data => {
-      this.studies = data;
-      console.log(data);
+      // @ts-ignore
+      for (let row of data) {
+        let study = new Study(row.study_ID, row.study_name, []);
+        this.studies.push(study);
+      }
+      this.addFormsToStudies(this.studies, this.allForms);
     });
-
   }
 
   getFormData() {
 
-    this.allForms = [];
-    console.log("Some massive messge");
     this.http.get(this.api_base_url + "/forms").subscribe(data => {
-      this.allForms = data;
-      console.log("this should be showing all forms:");
-      console.log(this.allForms);
-      this.getCurrentForms(1)
+      this.allForms = [];
+      // @ts-ignore
+      for (let row of data) {
+        this.allForms.push(new Form(row.form_ID, row.form_title, row.study_study_ID))
+      }
+      this.addFormsToStudies(this.studies, this.allForms);
+      this.getCurrentForms(1);
     });
+  };
+
+
+  getAllStudyFormData() {
+    this.getStudyMetaData();
+    this.getFormData();
   }
 
+  addFormsToStudies(studies: Study[], forms: Form[]) {
+    for (let study of studies) {
+      study.forms = [];
+      let forms_for_study =  forms.filter(form => form.study_id === study.id);
+      study.forms = forms_for_study
+    }
+    console.log("here are the transformed studies");
+    console.log(studies);
+    return studies;
+  }
+
+
+
   getOneTestFormHTML() {
-
-
     this.testFormHTML = [];
     this.section_array = [];
     this.http.get(this.api_base_url + "/single_form_test").subscribe(data => {

@@ -22,38 +22,37 @@
     </div>
   </div>
 
-  <!--<ion-item>-->
-    <!--<ion-label>Alert</ion-label>-->
-    <!--<ion-select id="customAlertSelect" interface="alert" multiple="true" placeholder="Select One">-->
-      <!--<ion-option value="bacon">Bacon</ion-option>-->
-      <!--<ion-option value="olives">Black Olives</ion-option>-->
-    <!--</ion-select>-->
-  <!--</ion-item>-->
 
-  <!--<div class="row" padding>-->
-    <!--<div class="col" align="left">-->
-        <!--<button ion-button (click)="openPicker()">Open Simple Picker</button>-->
-    <!--</div>-->
+  <ion-item>
+    <ion-label>Study</ion-label>
+    <ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">
+      <ion-option *ngFor="let study of studyDataService.studies" value="{{study.id}}" >{{study.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="selectedStudyId !== -1">
+    <ion-label>Forms</ion-label>
+    <!--<ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">-->
+    <ion-select multiple="true" [(ngModel)]="selectedFormId" (ngModelChange)="onFormSelection()">
+      <ion-option *ngFor="let form of selectedStudy.forms" value="{{form.form_id}}" >{{form.form_title}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <!--<div style="background-color: whitesmoke">-->
+  <!--<ion-slides #studySlides (ionSlideDidChange)="showCurrentForms()" pager="true">-->
+    <!--<ion-slide *ngFor="let study of studyDataService.studies">-->
+      <!--<div class="swiper-button-prev"></div>-->
+      <!--<ion-card>-->
+        <!--<ion-card-header>-->
+          <!--<ion-card-title text-wrap style="font-size:50px">{{study.name}}</ion-card-title>-->
+        <!--</ion-card-header>-->
+      <!--</ion-card>-->
+      <!--<div class="swiper-button-next"></div>-->
+    <!--</ion-slide>-->
+  <!--</ion-slides>-->
   <!--</div>-->
-
-
-  <div style="background-color: whitesmoke">
-  <ion-slides #studySlides (ionSlideDidChange)="showCurrentForms()" pager="true">
-    <!--<ion-slide *ngFor="let study of studiesService.studies">-->
-    <ion-slide *ngFor="let study of studyDataService.studies">
-      <div class="swiper-button-prev"></div>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title text-wrap style="font-size:50px">{{study.study_name}}</ion-card-title>
-        </ion-card-header>
-        <!--<ion-card-content text-center="">-->
-          <!--Select forms below-->
-        <!--</ion-card-content>-->
-      </ion-card>
-      <div class="swiper-button-next"></div>
-    </ion-slide>
-  </ion-slides>
-  </div>
 
     <div class="spacer" style="width: 748.333px; height: 0;"></div>
 
@@ -62,20 +61,36 @@
 
     <h1>Which documents?</h1>
 
-  <ion-grid>
-    <div *ngFor="let formRow of studyDataService.formsView">
-      <ion-row>
-      <ion-col *ngFor="let form of formRow" col-3>
-        <div align="center">
-          <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style=" width: 75%; height: 75%; margin-left: auto; margin-right: auto;" alt="Can't display image">
-        </div>
-        <div text-center="">
-          <h4>{{form.form_title}}</h4>
-        </div>
-      </ion-col>
-      </ion-row>
-    </div>
-  </ion-grid>
+  <!--<ion-grid>-->
+    <!--<div *ngFor="let formRow of studyDataService.formsView">-->
+      <!--<ion-row>-->
+      <!--<ion-col *ngFor="let form of formRow" col-3>-->
+        <!--<div align="center">-->
+          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style=" width: 75%; height: 75%; margin-left: auto; margin-right: auto;" alt="Can't display image">-->
+        <!--</div>-->
+        <!--<div text-center="">-->
+          <!--<h4>{{form.form_title}}</h4>-->
+        <!--</div>-->
+      <!--</ion-col>-->
+      <!--</ion-row>-->
+    <!--</div>-->
+  <!--</ion-grid>-->
+
+    <ion-grid>
+      <div *ngFor="let form of selectedStudyId.forms">
+        <ion-row>
+            <div align="center">
+              <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style=" width: 75%; height: 75%; margin-left: auto; margin-right: auto;" alt="Can't display image">
+            </div>
+            <div text-center="">
+              <h4>{{form.form_title}}</h4>
+            </div>
+        </ion-row>
+      </div>
+    </ion-grid>
+
+
+
 
   <h1>Send read-only copy of these documents via email:</h1>
 

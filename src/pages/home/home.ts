@@ -5,6 +5,8 @@ import { LoginPage } from "../login/login";
 import { DocumentsPage } from "../documents/documents";
 import { StudyDataProvider} from "../../providers/study-data/study-data";
 import { Slides } from "ionic-angular";
+import {Study} from "../../models/study";
+import {Form} from "../../models/form";
 
 @Component({
   selector: 'page-home',
@@ -13,10 +15,13 @@ import { Slides } from "ionic-angular";
 })
 
 export class HomePage {
+  allStudyFormData: Study[];
+  selectedStudyId: number = -1;
+  selectedStudy: Study;
+  selectedFormId = -1;
 
 
   @ViewChild('studySlides') studySlides: Slides;
-
 
   documentEmail: string = 'example@gmail.com';
   // currentForms: any = [];
@@ -27,11 +32,23 @@ export class HomePage {
     public studyDataService: StudyDataProvider,
   ) {}
 
+  onStudySelection() {
+    this.selectedStudy = this.allStudyFormData.find(study => study.id === +this.selectedStudyId);
+    console.log("current study: ");
+    console.log(this.selectedStudy);
+    // this.currentForms = this.selectedStudy.forms;
+
+  }
+
+  onFormSelection() {
+    console.log("selecting forms");
+    console.log(this.selectedFormId);
+  }
+
 
   showCurrentForms() {
 
     let selectedStudy = this.getSelectedStudy();
-
     this.studyDataService.getCurrentForms(selectedStudy);
     console.log("showing current forms");
     console.log(selectedStudy);
@@ -40,7 +57,7 @@ export class HomePage {
   getSelectedStudy() {
     let activeSlide = this.studySlides.getActiveIndex();
     let activeStudy = this.studyDataService.studies[activeSlide];
-    return activeStudy.study_ID;
+    return activeStudy.id;
   }
 
   sendEmail() {
@@ -70,8 +87,11 @@ export class HomePage {
 
   ionViewDidLoad(){
     // console.log("testing5");
-    this.studyDataService.getStudyData();
-    this.studyDataService.getFormData();
+    this.studyDataService.getAllStudyFormData();
+    this.allStudyFormData = this.studyDataService.studies;
+    // this.selectedStudyId = this.allStudyFormData[0];
+
+    // this.studyDataService.getFormData();
   }
 
   openDocumentsPage(){
