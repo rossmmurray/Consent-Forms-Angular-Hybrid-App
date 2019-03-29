@@ -15,10 +15,10 @@ import {Form} from "../../models/form";
 })
 
 export class HomePage {
-  allStudyFormData: Study[];
   selectedStudyId: number = -1;
   selectedStudy: Study;
-  selectedFormId = -1;
+  // selectedFormIds = [];
+  // selectedForms: Form[];
 
 
   @ViewChild('studySlides') studySlides: Slides;
@@ -33,32 +33,33 @@ export class HomePage {
   ) {}
 
   onStudySelection() {
-    this.selectedStudy = this.allStudyFormData.find(study => study.id === +this.selectedStudyId);
-    console.log("current study: ");
-    console.log(this.selectedStudy);
-    // this.currentForms = this.selectedStudy.forms;
+    this.selectedStudy = this.studyDataService.studies.find(study => study.id === +this.selectedStudyId);
+    // console.log("current study: ");
+    // console.log(this.selectedStudy);
+    // // this.currentForms = this.selectedStudy.forms;
 
   }
 
-  onFormSelection() {
-    console.log("selecting forms");
-    console.log(this.selectedFormId);
-  }
+  // onFormSelection() {
+  //   this.selectedFormIds = this.selectedFormIds.map(formId => +formId);
+  //   this.selectedForms = this.selectedStudy.forms.filter(form => this.selectedFormIds.indexOf(form.form_id) !== -1);
+  //
+  // }
 
-
-  showCurrentForms() {
-
-    let selectedStudy = this.getSelectedStudy();
-    this.studyDataService.getCurrentForms(selectedStudy);
-    console.log("showing current forms");
-    console.log(selectedStudy);
-  }
-
-  getSelectedStudy() {
-    let activeSlide = this.studySlides.getActiveIndex();
-    let activeStudy = this.studyDataService.studies[activeSlide];
-    return activeStudy.id;
-  }
+  //
+  // showCurrentForms() {
+  //
+  //   let selectedStudy = this.getSelectedStudy();
+  //   this.studyDataService.getCurrentForms(selectedStudy);
+  //   console.log("showing current forms");
+  //   console.log(selectedStudy);
+  // }
+  //
+  // getSelectedStudy() {
+  //   let activeSlide = this.studySlides.getActiveIndex();
+  //   let activeStudy = this.studyDataService.studies[activeSlide];
+  //   return activeStudy.id;
+  // }
 
   sendEmail() {
 
@@ -86,16 +87,17 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    // console.log("testing5");
     this.studyDataService.getAllStudyFormData();
-    this.allStudyFormData = this.studyDataService.studies;
-    // this.selectedStudyId = this.allStudyFormData[0];
 
-    // this.studyDataService.getFormData();
   }
 
   openDocumentsPage(){
-    this.navCtrl.push(DocumentsPage);
+    console.log("here are the studies before push to next page");
+    console.log(this.selectedStudy);
+    this.navCtrl.push(DocumentsPage, {
+      'selectedStudy': this.selectedStudy,
+      // 'forms': this.
+    });
   }
 
 }

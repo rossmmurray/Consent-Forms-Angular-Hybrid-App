@@ -73,6 +73,20 @@ export class StudyDataProvider {
   }
 
 
+  getStudyFormsSections(study_id: string) {
+    this.testFormHTML = [];
+    this.section_array = [];
+    this.http.get(this.api_base_url + "/study_forms_sections/" + study_id).subscribe(data => {
+      this.allSections = data;
+      console.log(this.allSections);
+      for (let section of this.allSections) {
+        let section_display = new FormDisplay(section.content, section.order, section.section_type);
+        // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
+        this.section_array[section_display.section_order] = section_display;
+      }
+      console.log(this.section_array);
+    });
+  }
 
   getOneTestFormHTML() {
     this.testFormHTML = [];

@@ -7,6 +7,8 @@ import { ToastController } from 'ionic-angular';
 import * as html2canvas from "html2canvas";
 import * as jsPDF from 'jspdf';
 import { File as realFile} from "@ionic-native/file/ngx";
+import {Study} from "../../models/study";
+import {Form} from "../../models/form";
 
 
 @IonicPage()
@@ -16,6 +18,8 @@ import { File as realFile} from "@ionic-native/file/ngx";
 })
 export class DocumentsPage {
   imgDataURL;
+  selectedStudy: Study;
+  selectedForms: Form[];
 
   @ViewChild('docPage') docPage: ElementRef;
 
@@ -27,11 +31,24 @@ export class DocumentsPage {
     public toastCtrl: ToastController,
     public studyDataService: StudyDataProvider,
     private file: realFile
-  ) {}
+  ) {
+    this.selectedStudy = navParams.get('selectedStudy');
+    this.selectedForms = this.selectedStudy.forms.filter(form => form.selected === true);
+
+    console.log("here are the data from the last page");
+    console.log(this.selectedStudy);
+    // console.log(this.selectedForms);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentsPage');
-    this.studyDataService.getOneTestFormHTML();
+    // this.studyDataService.getOneTestFormHTML();
+    this.studyDataService.getStudyFormsSections(String(this.selectedStudy.id));
+  }
+
+  showCurrentForm() {
+    console.log("segment chosen");
+    console.log(event);
   }
 
   getDocImage() {

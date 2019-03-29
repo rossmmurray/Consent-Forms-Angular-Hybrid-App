@@ -1,42 +1,47 @@
 <ion-header>
   <ion-navbar hideBackButton>
+
     <ion-title>
       Choose Study and Forms
     </ion-title>
+
+    <ion-buttons end>
+      <button ion-button color="primary" (click)="LogOut()">Log Out</button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
 
-  <div class="row" padding>
-    <div class="col">
-      <h1>Which study? </h1>
-    </div>
-    <div class="col" align="right">
-      <form (submit)="LogOut()">
-        <button ion-button color="primary">
-          Log out
-        </button>
-      </form>
-    </div>
-  </div>
+  <!--<div class="row" padding>-->
+    <!--<div class="col">-->
+      <h1 padding>Choose study and related forms </h1>
+
 
 
   <ion-item>
-    <ion-label>Study</ion-label>
+    <ion-label>Choose Study</ion-label>
     <ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">
       <ion-option *ngFor="let study of studyDataService.studies" value="{{study.id}}" >{{study.name}}</ion-option>
     </ion-select>
   </ion-item>
 
-  <ion-item *ngIf="selectedStudyId !== -1">
-    <ion-label>Forms</ion-label>
-    <!--<ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">-->
-    <ion-select multiple="true" [(ngModel)]="selectedFormId" (ngModelChange)="onFormSelection()">
-      <ion-option *ngFor="let form of selectedStudy.forms" value="{{form.form_id}}" >{{form.form_title}}</ion-option>
-    </ion-select>
-  </ion-item>
+  <ion-list *ngIf="selectedStudyId !== -1">
+    <ion-item *ngFor="let form of selectedStudy.forms" >
+      <ion-label>{{form.form_title}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="form.selected"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <!--<ion-item *ngIf="selectedStudyId !== -1">-->
+    <!--<ion-label>Choose Forms</ion-label>-->
+    <!--&lt;!&ndash;<ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">&ndash;&gt;-->
+    <!--<ion-select multiple="true" [(ngModel)]="selectedFormIds" (ngModelChange)="onFormSelection()">-->
+      <!--<ion-option *ngFor="let form of selectedStudy.forms" value="{{form.form_id}}" >{{form.form_title}}</ion-option>-->
+    <!--</ion-select>-->
+  <!--</ion-item>-->
 
 
 
@@ -59,7 +64,7 @@
   <div padding>
 
 
-    <h1>Which documents?</h1>
+    <!--<h1>Which documents?</h1>-->
 
   <!--<ion-grid>-->
     <!--<div *ngFor="let formRow of studyDataService.formsView">-->

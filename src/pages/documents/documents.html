@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content>
+
+
   <div class="container" padding>
 
     <h1 style="color:#000000;" class="padding-left">Study: Asthma AB101</h1>
@@ -13,37 +15,29 @@
   <br>
 
 
-  <div class="row padding grey" style="background-color: whitesmoke" padding>
-    <div class="col padding" style="background-color: lightskyblue" padding>
-      <div>
-        <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg"
-             style="display: block; width: auto; height: 75px; margin-left: auto; margin-right: auto;">
-      </div>
-      <h4 style="color:#000000;text-align:center;">Info Sheet 1</h4>
-    </div>
-    <div class="col padding">
-      <div>
-        <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg"
-             style="display: block; width: auto; height: 75px; margin-left: auto; margin-right: auto;">
-      </div>
-      <h4 style="color:#000000;text-align:center;">Info Sheet 2</h4>
-    </div>
-    <div class="col padding">
-      <div>
-        <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg"
-             style="display: block; width: auto; height: 75px; margin-left: auto; margin-right: auto;">
-      </div>
-      <h4 style="color:#000000;text-align:center;">Child Assent Form</h4>
-    </div>
-    <div class="col padding blue">
-      <div>
-        <img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg"
-             style="display: block; width: auto; height: 75px; margin-left: auto; margin-right: auto;">
-      </div>
-      <h4 style="color:#000000;text-align:center;">Consent Form1</h4>
-    </div>
-  </div>
-  <div class="spacer" style="width: 708px; height: 20px;"></div>
+  <ion-segment (ionChange)="showCurrentForm()">
+    <ion-segment-button  *ngFor="let form of selectedForms"  value="{{form.form_id}}">
+      <ion-label>{{form.form_title}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Default Segment -->
+  <!--<ion-segment (ionChange)="segmentChanged($event)">-->
+
+
+
+  <!--<div class="row padding grey" style="background-color: whitesmoke" padding>-->
+
+    <!--<div *ngFor="let form of selectedForms" class="col padding" style="background-color: lightskyblue" padding>-->
+      <!--<div>-->
+        <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg"-->
+             <!--style="display: block; width: auto; height: 75px; margin-left: auto; margin-right: auto;">-->
+      <!--</div>-->
+      <!--<h4 style="color:#000000;text-align:center;">Info Sheet 1</h4>-->
+    <!--</div>-->
+    <!---->
+  <!--</div>-->
+  <!--<div class="spacer" style="width: 708px; height: 20px;"></div>-->
 
 
   <div style="background-color: whitesmoke" align="center">
