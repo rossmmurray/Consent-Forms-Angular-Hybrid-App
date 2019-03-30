@@ -22,6 +22,7 @@ export class StudyDataProvider {
   section_array: FormDisplay[] = [];
   // api_base_url = "http://localhost:3003";
   selectedStudyDP: Study;
+  forms_with_html: Form[] = [];
 
   constructor(
     public http: HttpClient,
@@ -75,20 +76,40 @@ export class StudyDataProvider {
   }
 
 
-  getStudyFormsSections(study_id: string) {
+  getStudyFormsSections(study_id: string, forms: Form[]) {
     this.testFormHTML = [];
     this.section_array = [];
+    // this.forms
     this.http.get(this.api_base_url + "/study_forms_sections/" + study_id).subscribe(data => {
       this.allSections = data;
       console.log(this.allSections);
       for (let section of this.allSections) {
         let section_display = new FormDisplay(section.content, section.order, section.section_type, section.form_ID);
+        // this.forms_with_html[section.]
         // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
         this.section_array[section_display.section_order] = section_display;
       }
       console.log(this.section_array);
+
+      // add html to forms
+      this.forms_with_html = forms;
+      for (let form of this.forms_with_html) {
+        form.formHTML = this.section_array.filter(section => section.form_id == form.form_id)
+      }
+      console.log("here are the forms with their html in them");
+      console.log(this.forms_with_html);
+
+      // this.section_array.forEach(row => this.forms_with_html[row.])
+
     });
   }
+  //
+  // add_html_to_study_forms(section_array: FormDisplay[], studies: Study[]) {
+  //
+  //   for (let study of studies) {}
+  //
+  // }
+
 
   getOneTestFormHTML() {
     this.testFormHTML = [];

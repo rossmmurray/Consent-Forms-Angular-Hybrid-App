@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import { SignaturePad } from "angular2-signaturepad/signature-pad";
 import {Storage} from "@ionic/storage";
-import { ToastController} from "ionic-angular";
+import {Slides, ToastController} from "ionic-angular";
 
 
 @Component({
@@ -13,6 +13,7 @@ export class SigBlockComponent {
   isDrawing = false;
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  // @ViewChild('studySlides') slides: Slides;
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'canvasWidth': 500,
@@ -40,6 +41,7 @@ export class SigBlockComponent {
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
     console.log('begin drawing');
+    // this.slides.noSwiping = true;
   }
 
   savePad() {

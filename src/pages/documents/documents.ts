@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
 import {StudyDataProvider} from "../../providers/study-data/study-data";
 import {DomSanitizer} from "@angular/platform-browser";
 import { ToastController } from 'ionic-angular';
@@ -24,8 +24,13 @@ export class DocumentsPage {
   selectedForm: Form;
   selectedFormHTML;
   pid: number = 10000000;
+  swipeOptions = {
+    noSwiping: true,
+    noSwipingClass: 'do_not_swipe',
+  };
 
   @ViewChild('docPage') docPage: ElementRef;
+  @ViewChild('studySlides') slides: Slides;
 
   constructor(
     public navCtrl: NavController,
@@ -38,6 +43,7 @@ export class DocumentsPage {
   ) {
     this.selectedStudy = navParams.get('selectedStudy');
     this.selectedForms = this.selectedStudy.forms.filter(form => form.selected === true);
+    // this.selectedForms =
 
     console.log("here are the data from the last page");
     console.log(this.selectedStudy);
@@ -50,9 +56,19 @@ export class DocumentsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentsPage');
-    // this.studyDataService.getOneTestFormHTML();
-    this.studyDataService.getStudyFormsSections(String(this.selectedStudy.id));
+    this.studyDataService.getStudyFormsSections(String(this.selectedStudy.id), this.selectedForms);
     this.pid = this.generatePid();
+
+  }
+
+  disableSwiping() {
+    console.log("detected a touch");
+    this.slides.noSwiping = true;
+    this.slides.lockSwipes(true);
+  }
+
+  enableSwiping() {
+    this.slides.lockSwipes(false);
   }
 
   showCurrentForm() {

@@ -13,89 +13,63 @@
     <h3 style="color:#000000;" class="padding-left">PID: {{pid}}</h3>
   </div>
 
-  <ion-segment [(ngModel)]="selectedFormID" (ionChange)="showCurrentForm()">
-    <ion-segment-button  *ngFor="let form of selectedForms"  value="{{form.form_id}}">
-      <ion-label>{{form.form_title}}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <!--<ion-segment [(ngModel)]="selectedFormID" (ionChange)="showCurrentForm()">-->
+    <!--<ion-segment-button  *ngFor="let form of selectedForms"  value="{{form.form_id}}">-->
+      <!--<ion-label>{{form.form_title}}</ion-label>-->
+    <!--</ion-segment-button>-->
+  <!--</ion-segment>-->
 
   <div style="background-color: whitesmoke" align="center">
 
 
-    <!--&lt;!&ndash;<div style="background-color: whitesmoke">&ndash;&gt;-->
-    <!--<ion-slides #studySlides (ionSlideDidChange)="showCurrentForms()" pager="true">-->
-      <!--<ion-slide *ngFor="let form of selectedForms">-->
-      <!---->
-        <!---->
-        <!---->
-        <!---->
-      <!--</ion-slide>-->
-    <!--</ion-slides>-->
-    <!--</div>-->
+    <!--<div style="background-color: whitesmoke">-->
+    <!--(ionSlideDidChange)="showCurrentForms()"-->
+    <ion-slides #studySlides pager="true" >
+      <ion-slide *ngFor="let form of studyDataService.forms_with_html">
 
+        <!--start of document page-->
+        <div id="doc-page" #docPage style="background-color: white" text-left="">
 
-    <!--start of document page-->
-    <div id="doc-page" #docPage style="background-color: white" text-left="">
+          <div class="grey padding">
+            <div class="padding margin white">
 
-      <div class="grey padding">
-        <div class="padding margin white">
+              <ion-row>
+                <ion-col>
+                  <img width='120' class="logo_header" src="assets/imgs/gosh_logo.gif" alt="Image Not found">
+                </ion-col>
+              </ion-row>
 
-          <ion-row>
-            <ion-col>
-              <img class="logo_header" src="assets/imgs/gosh_logo.gif" alt="Image Not found">
-            </ion-col>
-          </ion-row>
-          <h1 *ngIf="selectedForm !== undefined" margin-top="0" align="center">{{selectedForm.form_title}}</h1>
-          <br>
+              <!--<h1 *ngIf="selectedForm !== undefined" margin-top="0" align="center">{{selectedForm.form_title}}</h1>-->
+              <h1 margin-top="0" align="center">{{form.form_title}}</h1>
+              <br>
 
-          <div *ngFor="let section of selectedFormHTML">
+              <div *ngFor="let section of form.formHTML">
 
-            <div ngSwitch="{{section.type_id}}">
+                <div ngSwitch="{{section.type_id}}">
 
-              <sig-block *ngSwitchCase="'<ca'"></sig-block>
-              <smiley-block *ngSwitchCase="'<bu'"></smiley-block>
-              <div *ngSwitchCase="'<p>'"><div [innerHTML]="section.html_display"></div></div>
-              <ion-item *ngSwitchCase="'<di'"><ion-label>{{section.section_text}}</ion-label><ion-checkbox></ion-checkbox></ion-item>
+                  <sig-block (touchstart)="disableSwiping()" (touchend)="enableSwiping()" *ngSwitchCase="'<ca'"></sig-block>
+                  <smiley-block *ngSwitchCase="'<bu'"></smiley-block>
+                  <div *ngSwitchCase="'<p>'"><div [innerHTML]="section.html_display"></div></div>
+                  <ion-item *ngSwitchCase="'<di'"><ion-label>{{section.section_text}}</ion-label><ion-checkbox></ion-checkbox></ion-item>
+
+                </div>
+
+              </div>
 
             </div>
-
           </div>
-
-
-
-          <!--<sig-block></sig-block>-->
-
-          <!--<sig-block></sig-block>-->
-
-
-          <!--&lt;!&ndash;Toggle&ndash;&gt;-->
-          <!--<ion-item>-->
-            <!--<ion-label>Click the toggle if you agree to x ...</ion-label>-->
-            <!--<ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>-->
-          <!--</ion-item>-->
-
-          <!--&lt;!&ndash;Paragraph&ndash;&gt;-->
-          <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
-            <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco-->
-            <!--laboris nisi ut aliquip ex ea commodo consequat. Duis aute-->
-            <!--irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur-->
-            <!--sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
-          <!--</p>-->
-
-          <!--&lt;!&ndash;Input&ndash;&gt;-->
-          <!--<ion-item>-->
-            <!--<ion-label position="fixed">Enter something</ion-label>-->
-            <!--<ion-input></ion-input>-->
-          <!--</ion-item>-->
-
-          <!--&lt;!&ndash;Button&ndash;&gt;-->
-          <!--<smiley-block></smiley-block>-->
-
-          <!--<smiley-block></smiley-block>-->
-
         </div>
-      </div>
-    </div>
+
+
+
+      </ion-slide>
+    </ion-slides>
+
+
+
+
+
+
   </div>
 
   <div class="container" padding>
