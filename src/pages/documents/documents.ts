@@ -20,6 +20,10 @@ export class DocumentsPage {
   imgDataURL;
   selectedStudy: Study;
   selectedForms: Form[];
+  selectedFormID = 1;
+  selectedForm: Form;
+  selectedFormHTML;
+  pid: number = 10000000;
 
   @ViewChild('docPage') docPage: ElementRef;
 
@@ -40,15 +44,25 @@ export class DocumentsPage {
     // console.log(this.selectedForms);
   }
 
+  generatePid() {
+    return Math.floor(Math.random() * 1000000000);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentsPage');
     // this.studyDataService.getOneTestFormHTML();
     this.studyDataService.getStudyFormsSections(String(this.selectedStudy.id));
+    this.pid = this.generatePid();
   }
 
   showCurrentForm() {
     console.log("segment chosen");
-    console.log(event);
+    console.log(this.selectedFormID);
+    this.selectedForm = this.selectedForms.find(form => form.form_id == this.selectedFormID);
+    console.log(this.selectedForm);
+    console.log("showing section array");
+    this.selectedFormHTML = this.studyDataService.section_array.filter(section => section.form_id == this.selectedForm.form_id);
+    console.log(this.selectedFormHTML);
   }
 
   getDocImage() {

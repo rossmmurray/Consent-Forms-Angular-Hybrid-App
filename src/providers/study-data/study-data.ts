@@ -19,8 +19,9 @@ export class StudyDataProvider {
   safeTestScriptHTML: SafeScript;
   api_base_url = "https://designteam14consentapi.azurewebsites.net";
   allSections: any = [];
-  section_array: any = [];
+  section_array: FormDisplay[] = [];
   // api_base_url = "http://localhost:3003";
+  selectedStudyDP: Study;
 
   constructor(
     public http: HttpClient,
@@ -39,6 +40,7 @@ export class StudyDataProvider {
         this.studies.push(study);
       }
       this.addFormsToStudies(this.studies, this.allForms);
+      this.selectedStudyDP = this.studies[0];
     });
   }
 
@@ -80,7 +82,7 @@ export class StudyDataProvider {
       this.allSections = data;
       console.log(this.allSections);
       for (let section of this.allSections) {
-        let section_display = new FormDisplay(section.content, section.order, section.section_type);
+        let section_display = new FormDisplay(section.content, section.order, section.section_type, section.form_ID);
         // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
         this.section_array[section_display.section_order] = section_display;
       }
@@ -97,7 +99,7 @@ export class StudyDataProvider {
 
       console.log(this.allSections);
       for (let section of this.allSections) {
-        let section_display = new FormDisplay(section.content, section.order, section.section_type);
+        let section_display = new FormDisplay(section.content, section.order, section.section_type, section.form_ID);
         // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
         this.section_array[section_display.section_order] = section_display;
       }

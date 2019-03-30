@@ -8,7 +8,7 @@ export class Form {
     this.form_title = form_title;
     this.form_id = +form_ID;
     this.study_id = +study_study_ID;
-    this.selected = false;
+    this.selected = true;
   }
 }
 

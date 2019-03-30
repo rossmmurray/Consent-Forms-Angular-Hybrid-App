@@ -88,7 +88,8 @@ export class HomePage {
 
   ionViewDidLoad(){
     this.studyDataService.getAllStudyFormData();
-
+    // this.selectedStudyId = this.studyDataService.selectedStudyDP.id;
+    // this.selectedStudy = this.studyDataService.selectedStudyDP;
   }
 
   openDocumentsPage(){

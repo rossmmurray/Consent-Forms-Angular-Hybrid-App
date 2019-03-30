@@ -9,38 +9,32 @@
 
   <div class="container" padding>
 
-    <h1 style="color:#000000;" class="padding-left">Study: Asthma AB101</h1>
-    <h3 style="color:#000000;" class="padding-left">PID: AB101001</h3>
+    <h1 style="color:#000000;" class="padding-left">Study: {{selectedStudy.name}}</h1>
+    <h3 style="color:#000000;" class="padding-left">PID: {{pid}}</h3>
   </div>
-  <br>
 
-
-  <ion-segment (ionChange)="showCurrentForm()">
+  <ion-segment [(ngModel)]="selectedFormID" (ionChange)="showCurrentForm()">
     <ion-segment-button  *ngFor="let form of selectedForms"  value="{{form.form_id}}">
       <ion-label>{{form.form_title}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 
-  <!-- Default Segment -->
-  <!--<ion-segment (ionChange)="segmentChanged($event)">-->
-
-
-
-  <!--<div class="row padding grey" style="background-color: whitesmoke" padding>-->
-
-    <!--<div *ngFor="let form of selectedForms" class="col padding" style="background-color: lightskyblue" padding>-->
-      <!--<div>-->
-        <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg"-->
-             <!--style="display: block; width: auto; height: 75px; margin-left: auto; margin-right: auto;">-->
-      <!--</div>-->
-      <!--<h4 style="color:#000000;text-align:center;">Info Sheet 1</h4>-->
-    <!--</div>-->
-    <!---->
-  <!--</div>-->
-  <!--<div class="spacer" style="width: 708px; height: 20px;"></div>-->
-
-
   <div style="background-color: whitesmoke" align="center">
+
+
+    <!--&lt;!&ndash;<div style="background-color: whitesmoke">&ndash;&gt;-->
+    <!--<ion-slides #studySlides (ionSlideDidChange)="showCurrentForms()" pager="true">-->
+      <!--<ion-slide *ngFor="let form of selectedForms">-->
+      <!---->
+        <!---->
+        <!---->
+        <!---->
+      <!--</ion-slide>-->
+    <!--</ion-slides>-->
+    <!--</div>-->
+
+
+    <!--start of document page-->
     <div id="doc-page" #docPage style="background-color: white" text-left="">
 
       <div class="grey padding">
@@ -51,11 +45,10 @@
               <img class="logo_header" src="assets/imgs/gosh_logo.gif" alt="Image Not found">
             </ion-col>
           </ion-row>
-          <h1 margin-top="0" align="center">Study AB100045: Test study 1</h1>
+          <h1 *ngIf="selectedForm !== undefined" margin-top="0" align="center">{{selectedForm.form_title}}</h1>
           <br>
 
-
-          <div *ngFor="let section of studyDataService.section_array">
+          <div *ngFor="let section of selectedFormHTML">
 
             <div ngSwitch="{{section.type_id}}">
 
