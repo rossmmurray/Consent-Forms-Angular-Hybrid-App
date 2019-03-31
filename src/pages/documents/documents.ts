@@ -99,12 +99,15 @@ export class DocumentsPage {
 
     this.numberOfDocs = this.docPageList.toArray().length;
     this.numberOfDocsRendered = 0;
+    let doc = new jsPDF("p", "mm", "a4");
 
     for (let docPage of this.docPageList.toArray()) {
       // console.log(docPage);
 
+
       let docElement = docPage.nativeElement;
-      html2canvas(docElement).then(canvas => {
+      const options = {background:"white",height : docElement.clientHeight , width : docElement.clientWidth  };
+      html2canvas(docElement, options).then(canvas => {
         // console.log("doing something at least");
         // console.log(canvas);
 
@@ -115,9 +118,17 @@ export class DocumentsPage {
         // console.log(imgDataURL);
         this.imgDataURLList.push(imgDataURL);
 
-        //Add image Canvas to PDF
-        // let doc = new jsPDF("p", "mm", "a4");
-        // doc.addImage(imgDataURL, 'PNG', 20, 20);
+        // put in pdf
+        let canvasWidth = 180;
+        let canvasHeight = canvasWidth * canvas.height / canvas.width;
+        doc.addImage(imgDataURL, 'JPEG', 10, 10, canvasWidth, canvasHeight);
+
+        if (this.numberOfDocsRendered < this.numberOfDocs) {
+          doc.addPage();
+        };
+
+
+
 
         // doc.output('dataurlnewwindow');
         //
@@ -154,7 +165,12 @@ export class DocumentsPage {
           console.log(formDataBlob);
           const consent = new Consent(formDataBlob.toString(), 2, 3, 4);
           console.log("here a result form db");
-          this.studyDataService.sendConsent(consent).subscribe(db_res => console.log(db_res));
+          // this.studyDataService.sendConsent(consent).subscribe(db_res => console.log(db_res));
+
+
+          let file = doc.output('datauri');
+          const consentPdf = new Consent(file.toString(), 2, 3, 4);
+          this.studyDataService.sendConsent(consentPdf).subscribe(db_res => console.log(db_res));
 
           loading.dismiss();
         }
