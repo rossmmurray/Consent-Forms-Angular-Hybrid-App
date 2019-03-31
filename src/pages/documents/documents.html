@@ -10,7 +10,7 @@
   <div class="container" padding>
 
     <h1 style="color:#000000;" class="padding-left">Study: {{selectedStudy.name}}</h1>
-    <h3 style="color:#000000;" class="padding-left">PID: {{pid}}</h3>
+    <h3 style="color:#000000;" class="padding-left">PID: <span style="color: red;">{{pid}}</span></h3>
   </div>
 
   <!--<ion-segment [(ngModel)]="selectedFormID" (ionChange)="showCurrentForm()">-->
@@ -34,6 +34,10 @@
             <div class="padding margin white">
 
               <ion-row>
+                <ion-col>
+                  <h3 style="color:#000000;" class="padding-left">PID: <span style="color: red;">{{pid}}</span></h3>
+                </ion-col>
+
                 <ion-col>
                   <img width='120' class="logo_header" src="assets/imgs/gosh_logo.gif" alt="Image Not found">
                 </ion-col>
@@ -98,8 +102,9 @@
   </div>
 
   <ion-row>
-    <ion-col width-80>
-      <img [src]="imgDataURL"/>
+
+    <ion-col *ngFor="let image of imgDataURLList" width-80>
+      <img [src]="image"/>
     </ion-col>
   </ion-row>
 

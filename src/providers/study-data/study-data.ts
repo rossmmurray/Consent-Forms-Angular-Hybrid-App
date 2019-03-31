@@ -1,10 +1,13 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {DomSanitizer, SafeHtml, SafeScript} from "@angular/platform-browser";
 import {FormDisplay} from "../../models/form-display";
 import {Form} from "../../models/form";
 import {Study} from "../../models/study";
+import { Consent} from "../../models/consent";
+import {Observable} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 
 @Injectable()
@@ -24,6 +27,7 @@ export class StudyDataProvider {
   selectedStudyDP: Study;
   forms_with_html: Form[] = [];
 
+
   constructor(
     public http: HttpClient,
     public sanitizer: DomSanitizer
@@ -42,7 +46,7 @@ export class StudyDataProvider {
       }
       this.addFormsToStudies(this.studies, this.allForms);
       this.selectedStudyDP = this.studies[0];
-    });
+    }, error => (console.log(error)));
   }
 
   getFormData() {
@@ -126,21 +130,22 @@ export class StudyDataProvider {
       }
 
       console.log(this.section_array);
-
-      // content: "<p>This is an example of a paragraph.</p>"
-      // form_form_ID: 6
-      // formsection_ID: 1
-      // order: "0"
-      // section_type: "<p>"
-
-
-      // this.testFormHTML = data[0].form_pretty_html;
-      // this.testFormHTML = this.testFormHTML[0];
-      // console.log(data);
-      // console.log(this.testFormHTML);
-      // this.safeTestFormHTML = this.sanitizer.bypassSecurityTrustHtml(this.testFormHTML);
-      // this.safeTestScriptHTML = this.sanitizer.bypassSecurityTrustScript(this.testFormHTML)
     });
+  }
+
+  sendConsent(consent: Consent) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // 'Authorization': 'my-auth-token'
+      })
+    };
+
+    let consentJson = JSON.stringify(consent);
+    console.log("JSON being sent with post request to api");
+    console.log(consentJson);
+    return this.http.post(this.api_base_url + "/form_html", consentJson, httpOptions )
+
   }
 
   static getFormLayout(form_array) {
