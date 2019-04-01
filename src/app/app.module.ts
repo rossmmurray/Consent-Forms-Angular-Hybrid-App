@@ -18,7 +18,7 @@ import {SmileyBlockComponent} from "../components/smiley-block/smiley-block";
 import { File as realFile} from "@ionic-native/file/ngx";
 import {WheelSelector} from "@ionic-native/wheel-selector/ngx";
 // import {Em} from "@ionic-native/email-composer";
-import {EmailComposer} from "@ionic-native/email-composer";
+import {EmailComposer} from "@ionic-native/email-composer/ngx";
 
 @NgModule({
   declarations: [

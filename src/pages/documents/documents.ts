@@ -12,7 +12,7 @@ import {Form} from "../../models/form";
 import { LoadingController} from "ionic-angular";
 import {HttpClient} from '@angular/common/http';
 import {Consent} from "../../models/consent";
-import {EmailComposer} from "@ionic-native/email-composer";
+import {EmailComposer} from "@ionic-native/email-composer/ngx";
 import {HomePage} from "../home/home";
 
 
@@ -20,7 +20,7 @@ import {HomePage} from "../home/home";
 @Component({
   selector: 'page-documents',
   templateUrl: 'documents.html',
-  // providers: [EmailComposer]
+  providers: [EmailComposer]
 })
 export class DocumentsPage {
   imgDataURLList= [];
@@ -218,33 +218,32 @@ export class DocumentsPage {
 
   sendEmail() {
 
-    console.log("trying to send an email");
 //
-    let email = {
-      to: 'max@mustermann.de',
-      cc: 'erika@mustermann.de',
-      bcc: ['john@doe.com', 'jane@doe.com'],
-      // attachments: [
-      //   'file://img/logo.png',
-      //   'res://icon.png',
-      //   'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-      //   'file://README.pdf'
-      // ],
-      subject: 'Cordova Icons',
-      body: 'How are you? Nice greetings from Leipzig',
-      isHtml: true
-    };
-
-    this.emailComposer.open(email);
-
-    this.emailComposer.isAvailable().then((available: boolean) =>{
-      if(available) {
-
-// Send a text message using default options
-        this.emailComposer.open(email);
-        //Now we know we can send
-      }
-    });
+//     let email = {
+//       to: 'max@mustermann.de',
+//       cc: 'erika@mustermann.de',
+//       bcc: ['john@doe.com', 'jane@doe.com'],
+//       // attachments: [
+//       //   'file://img/logo.png',
+//       //   'res://icon.png',
+//       //   'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+//       //   'file://README.pdf'
+//       // ],
+//       subject: 'Cordova Icons',
+//       body: 'How are you? Nice greetings from Leipzig',
+//       isHtml: true
+//     };
+//
+//     // this.emailComposer.open(email);
+//
+//     this.emailComposer.isAvailable().then((available: boolean) =>{
+//       if(available) {
+//
+// // Send a text message using default options
+//         this.emailComposer.open(email);
+//         //Now we know we can send
+//       }
+//     });
 //     this.emailComposer.isAvailable();
 
 
