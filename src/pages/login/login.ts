@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {DocumentsPage} from "../documents/documents";
+import {StudyDataProvider} from "../../providers/study-data/study-data";
 
 /**
  * Generated class for the LoginPage page.
@@ -13,6 +15,7 @@ import {HomePage} from "../home/home";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  providers: [StudyDataProvider]
 })
 export class LoginPage {
 
@@ -23,7 +26,9 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public studyDataService: StudyDataProvider
+  ) {
   }
 
   doLogin() {
@@ -39,7 +44,11 @@ export class LoginPage {
 
       toast.present();
 
-    this.navCtrl.push(HomePage);
+    // this.navCtrl.push(DocumentsPage);
+    this.navCtrl.push(DocumentsPage, {
+      'selectedStudy': this.studyDataService.studies[2],
+      // 'forms': this.
+    });
 
     // this.user.login(this.account).subscribe((resp) => {
     //   this.navCtrl.push(MainPage);
@@ -50,6 +59,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    this.studyDataService.getAllStudyFormData();
   }
 
 }

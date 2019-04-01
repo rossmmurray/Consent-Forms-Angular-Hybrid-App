@@ -7,10 +7,16 @@
 <ion-content>
 
 
-  <div class="container" padding>
-
-    <h1 style="color:#000000;" class="padding-left">Study: {{selectedStudy.name}}</h1>
-    <h3 style="color:#000000;" class="padding-left">PID: <span style="color: red;">{{pid}}</span></h3>
+  <div class="container" padding-horizontal>
+<ion-row>
+<ion-col>
+  <h1 style="color:#000000;" class="padding-left">Study: {{selectedStudy.name}}</h1>
+  <h3 style="color:#000000;" class="padding-left">PID: <span style="color: red;">{{pid}}</span></h3>
+</ion-col>
+  <ion-col>
+    <button (click)="changeStudyForms()" float-right ion-button color="primary">Change Study or Forms</button>
+  </ion-col>
+</ion-row>
   </div>
 
   <!--<ion-segment [(ngModel)]="selectedFormID" (ionChange)="showCurrentForm()">-->
@@ -79,24 +85,38 @@
   <div class="container" padding>
 
 
-    <ion-item>
-      <ion-label position="floating">Email:</ion-label>
-      <ion-input type="email" name="email"></ion-input>
-    </ion-item>
+    <form>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-9>
+          <ion-item class="consent_input">
+            <ion-label position="floating"><h1>Email:</h1></ion-label>
+            <ion-input type="email" name="email"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <button (click)="sendEmail()" ion-button color="primary" block><h2>Send</h2></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </form>
 
 
-    <h2>The PID is: AB101001</h2>
+
+
+
+    <h2>The PID is: {{pid}}</h2>
     <h3 style="color:#BD0000;">Please note this down before clicking the below button</h3>
     <div class="spacer" style="width: 728px; height: 12px;"></div>
 
     <form>
-      <button (click)="getDocImage()" ion-button color="primary" large block><h1>Submit All Forms and Email confirmation</h1></button>
+      <button (click)="getDocImage()" ion-button color="primary" large block><h1>Submit All Forms</h1></button>
     </form>
 
-    <div class="my-inline-block" align-items-center>
-      <button ion-button color="danger">Go back</button>
-      <h3> Note: you will lose you're currently inputted data</h3>
-    </div>
+    <!--<div class="my-inline-block" align-items-center>-->
+      <!--<button ion-button color="danger">Go back</button>-->
+      <!--<h3> Note: you will lose you're currently inputted data</h3>-->
+    <!--</div>-->
 
 
   </div>

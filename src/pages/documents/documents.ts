@@ -12,12 +12,15 @@ import {Form} from "../../models/form";
 import { LoadingController} from "ionic-angular";
 import {HttpClient} from '@angular/common/http';
 import {Consent} from "../../models/consent";
+import {EmailComposer} from "@ionic-native/email-composer";
+import {HomePage} from "../home/home";
 
 
 @IonicPage()
 @Component({
   selector: 'page-documents',
   templateUrl: 'documents.html',
+  providers: [EmailComposer]
 })
 export class DocumentsPage {
   imgDataURLList= [];
@@ -45,6 +48,7 @@ export class DocumentsPage {
     public toastCtrl: ToastController,
     public studyDataService: StudyDataProvider,
     public loadingController: LoadingController,
+    private emailComposer: EmailComposer,
     private file: realFile
   ) {
     this.selectedStudy = navParams.get('selectedStudy');
@@ -172,20 +176,81 @@ export class DocumentsPage {
           const consentPdf = new Consent(file.toString(), 2, 3, 4);
           this.studyDataService.sendConsent(consentPdf).subscribe(db_res => console.log(db_res));
 
+          //
+          // let email = {
+          //   to: 'rossmichaelm@gmail.com',
+          //   //cc: 'jdnichollsc@hotmail.com',
+          //   //bcc: ['jdnichollsc@hotmail.com'],
+          //   // attachments: [
+          //   //   this.generateAttachment(file, "myFileName.pdf")
+          //   // ],
+          //   subject: 'Mira un PDF!',
+          //   body: 'Abre el PDF creado con jsPDF :)',
+          //   isHtml: true
+          // };
+
+          // let email = {
+          //   to: 'max@mustermann.de',
+          //   cc: 'erika@mustermann.de',
+          //   bcc: ['john@doe.com', 'jane@doe.com'],
+          //   subject: 'Cordova Icons',
+          //   body: 'How are you? Nice greetings from Leipzig',
+          //   isHtml: true
+          // };
+          //
+          // // this.emailComposer.open(email);
+          //
+          // this.emailComposer.isAvailable().then((available: boolean) =>{
+          //   if(available) {
+          //     //Now we know we can send
+          //     this.emailComposer.open(email);
+          //   }
+          // });
+
+
           loading.dismiss();
         }
 
       })
     }
 
-    // send consent
+  }
 
-    // db_res => console.log(db_res)
+  sendEmail() {
+
+//
+    let email = {
+      to: 'max@mustermann.de',
+      cc: 'erika@mustermann.de',
+      bcc: ['john@doe.com', 'jane@doe.com'],
+      // attachments: [
+      //   'file://img/logo.png',
+      //   'res://icon.png',
+      //   'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+      //   'file://README.pdf'
+      // ],
+      subject: 'Cordova Icons',
+      body: 'How are you? Nice greetings from Leipzig',
+      isHtml: true
+    };
+
+
+    this.emailComposer.isAvailable().then((available: boolean) =>{
+      if(available) {
+
+// Send a text message using default options
+        this.emailComposer.open(email);
+        //Now we know we can send
+      }
+    });
+//     this.emailComposer.isAvailable();
 
 
 
+  }
 
-
+  changeStudyForms() {
+    this.navCtrl.push(HomePage);
   }
 
 

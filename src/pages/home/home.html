@@ -97,31 +97,31 @@
 
 
 
-  <h1>Send read-only copy of these documents via email:</h1>
+  <!--<h1>Send read-only copy of these documents via email:</h1>-->
 
-  <form (submit)="sendEmail()">
-    <ion-row>
-      <ion-col col-8>
-        <ion-item>
-          <ion-label>Email: </ion-label>
-          <ion-input type="email" [(ngModel)]="documentEmail" name="email" ></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <button ion-button color="primary" large  block>Send</button>
-      </ion-col>
-    </ion-row>
-  </form>
+  <!--<form (submit)="sendEmail()">-->
+    <!--<ion-row>-->
+      <!--<ion-col col-8>-->
+        <!--<ion-item>-->
+          <!--<ion-label>Email: </ion-label>-->
+          <!--<ion-input type="email" [(ngModel)]="documentEmail" name="email" ></ion-input>-->
+        <!--</ion-item>-->
+      <!--</ion-col>-->
+      <!--<ion-col>-->
+        <!--<button ion-button color="primary" large  block>Send</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</form>-->
 
-  <h1>Show these documents to:</h1>
+  <!--<h1>Show these documents to:</h1>-->
 
   <form (submit)="openDocumentsPage()">
     <ion-row>
+      <!--<ion-col>-->
+        <!--<button  ion-button outline color="primary" large block>Read</button>-->
+      <!--</ion-col>-->
       <ion-col>
-        <button  ion-button outline color="primary" large block>Read</button>
-      </ion-col>
-      <ion-col>
-        <button ion-button color="primary" large  block>Fill Out</button>
+        <button ion-button color="primary" large  block>Show Documents</button>
       </ion-col>
     </ion-row>
   </form>

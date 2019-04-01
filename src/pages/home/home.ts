@@ -90,6 +90,7 @@ export class HomePage {
     console.log("ionViewDidLoad")
     this.studyDataService.getAllStudyFormData();
     console.log("after get all study form data")
+
     // this.selectedStudyId = this.studyDataService.selectedStudyDP.id;
     // this.selectedStudy = this.studyDataService.selectedStudyDP;
   }
