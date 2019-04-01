@@ -20,7 +20,7 @@ import {HomePage} from "../home/home";
 @Component({
   selector: 'page-documents',
   templateUrl: 'documents.html',
-  providers: [EmailComposer]
+  // providers: [EmailComposer]
 })
 export class DocumentsPage {
   imgDataURLList= [];
@@ -218,6 +218,7 @@ export class DocumentsPage {
 
   sendEmail() {
 
+    console.log("trying to send an email");
 //
     let email = {
       to: 'max@mustermann.de',
@@ -234,6 +235,7 @@ export class DocumentsPage {
       isHtml: true
     };
 
+    this.emailComposer.open(email);
 
     this.emailComposer.isAvailable().then((available: boolean) =>{
       if(available) {
