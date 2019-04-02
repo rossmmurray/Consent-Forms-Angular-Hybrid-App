@@ -95,7 +95,7 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <button (click)="sendEmail()" ion-button color="primary" block><h2>Send</h2></button>
+          <button (click)="EmailDocs()" ion-button color="primary" block><h2>Send</h2></button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -105,12 +105,10 @@
 
 
 
-    <h2>The PID is: {{pid}}</h2>
-    <h3 style="color:#BD0000;">Please note this down before clicking the below button</h3>
-    <div class="spacer" style="width: 728px; height: 12px;"></div>
+    <h1 padding >Once you have filled in the forms, please hand the device back to the member of staff. Thank you.</h1>
 
-    <form>
-      <button (click)="getDocImage()" ion-button color="primary" large block><h1>Submit All Forms</h1></button>
+    <form padding-left align="center">
+      <button (click)="trySendFormsToDB()" ion-button color="primary" outline ><h2 padding>(For staff only) Submit All Forms</h2></button>
     </form>
 
     <!--<div class="my-inline-block" align-items-center>-->
@@ -121,12 +119,11 @@
 
   </div>
 
-  <ion-row>
-
-    <ion-col *ngFor="let image of imgDataURLList" width-80>
-      <img [src]="image"/>
-    </ion-col>
-  </ion-row>
+  <!--<ion-row>-->
+    <!--<ion-col *ngFor="let image of imgDataURLList" width-80>-->
+      <!--<img [src]="image"/>-->
+    <!--</ion-col>-->
+  <!--</ion-row>-->
 
 
 </ion-content>

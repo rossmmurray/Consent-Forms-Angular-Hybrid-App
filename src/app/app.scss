@@ -37,9 +37,9 @@
 
 #doc-page
 {
-  //align-content: center;
+  align-content: center;
   width:720px; /* or whatever width you want. */
-  //max-width:800px; /* or whatever width you want. */
+  max-width:100%; /* or whatever width you want. */
   min-height: 800px;
   display: inline-block;
   margin-top: 30px;
@@ -97,8 +97,14 @@ canvas {
   border: solid darkgray 2px;
 }
 
-//h1 {
-//  margin-top: 0px;
-//}
+h3, h2, h1 {
+  margin: .5rem !important;
+}
 
-
+////.myAlert {
+//  .alert-ios .alert-message,
+//  .alert-md .alert-message {
+//    width: 700px;
+//  }
+//
+////}

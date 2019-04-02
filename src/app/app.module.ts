@@ -17,6 +17,7 @@ import { SigBlockComponent} from "../components/sig-block/sig-block";
 import {SmileyBlockComponent} from "../components/smiley-block/smiley-block";
 import { File as realFile} from "@ionic-native/file/ngx";
 import {WheelSelector} from "@ionic-native/wheel-selector/ngx";
+import {utilities} from "../shared/utilities";
 // import {Em} from "@ionic-native/email-composer";
 // import {EmailComposer} from "@ionic-native/email-composer/ngx";
 
@@ -52,6 +53,7 @@ import {WheelSelector} from "@ionic-native/wheel-selector/ngx";
     StudyDataProvider,
     realFile,
     WheelSelector,
+    utilities
   ]
 })
 export class AppModule {}

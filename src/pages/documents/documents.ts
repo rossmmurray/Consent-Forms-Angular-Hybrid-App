@@ -2,58 +2,50 @@ import {Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angula
 import {IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
 import {StudyDataProvider} from "../../providers/study-data/study-data";
 import {DomSanitizer} from "@angular/platform-browser";
-import { ToastController } from 'ionic-angular';
+import {ToastController} from 'ionic-angular';
 
 import * as html2canvas from "html2canvas";
 import * as jsPDF from 'jspdf';
-import { File as realFile} from "@ionic-native/file/ngx";
+import {File as realFile} from "@ionic-native/file/ngx";
 import {Study} from "../../models/study";
 import {Form} from "../../models/form";
-import { LoadingController} from "ionic-angular";
-import {HttpClient} from '@angular/common/http';
+import {LoadingController} from "ionic-angular";
 import {Consent} from "../../models/consent";
-// import {EmailComposer} from "@ionic-native/email-composer/ngx";
 import {HomePage} from "../home/home";
-import { Platform } from 'ionic-angular';
+import {Platform} from 'ionic-angular';
+import {utilities} from "../../shared/utilities";
+import {AlertController} from "ionic-angular";
+
 
 declare var cordova;
-
 
 @IonicPage()
 @Component({
   selector: 'page-documents',
   templateUrl: 'documents.html',
-  // providers: [EmailComposer]
+  providers: [utilities]
 })
 export class DocumentsPage {
-  imgDataURLList= [];
   selectedStudy: Study;
   selectedForms: Form[];
   selectedFormID = 1;
   selectedForm: Form;
   selectedFormHTML;
   pid: number = 10000000;
-  swipeOptions = {
-    noSwiping: true,
-    noSwipingClass: 'do_not_swipe',
-  };
-  numberOfDocs: number = 0;
-  numberOfDocsRendered: number = 0;
 
   @ViewChildren('docPage') docPageList: QueryList<ElementRef>;
   @ViewChild('studySlides') slides: Slides;
 
   constructor(
+    public utils: utilities,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public StudyDataService: StudyDataProvider,
     public sanitizer: DomSanitizer,
     public toastCtrl: ToastController,
     public studyDataService: StudyDataProvider,
     public loadingController: LoadingController,
-    // private emailComposer: EmailComposer,
-    private file: realFile,
-    public platform: Platform
+    public platform: Platform,
+    public alertController: AlertController
   ) {
     this.selectedStudy = navParams.get('selectedStudy');
     this.selectedForms = this.selectedStudy.forms.filter(form => form.selected === true);
@@ -95,138 +87,90 @@ export class DocumentsPage {
     console.log(this.selectedFormHTML);
   }
 
-  getDocImage() {
+  createDocOfImages(docPages: QueryList<ElementRef>): Promise<jsPDF> {
+    return new Promise((resolve, reject) => {
+      let docGenerationPromises = [];
+      let doc = new jsPDF("p", "mm", "a4");
+      doc.deletePage(1);
 
+      // loop through all pages
+      for (let docPage of docPages.toArray()) {
+        let docElement = docPage.nativeElement;
+        const options = {background: "white", height: docElement.clientHeight, width: docElement.clientWidth};
+        let singlePromise = html2canvas(docElement, options).then(canvas => {
+          this.utils.addImagePageToDoc(doc, canvas);
+          return canvas;
+        });
+        docGenerationPromises.push(singlePromise);
+      }
+
+      // waits for all promises to be fulfilled then returns doc
+      Promise.all(docGenerationPromises).then(y => {
+        resolve(doc);
+      });
+    })
+  }
+
+  sendDocsToDB() {
+
+    // show loading animation
     const loading = this.loadingController.create({
       content: '<h3> Saving Forms... <br>Please give the device back to the member of staff. </h3>',
     });
-
     loading.present();
 
-    this.imgDataURLList = [];
-
-    this.numberOfDocs = this.docPageList.toArray().length;
-    this.numberOfDocsRendered = 0;
-    let doc = new jsPDF("p", "mm", "a4");
-
-    for (let docPage of this.docPageList.toArray()) {
-      // console.log(docPage);
-
-
-      let docElement = docPage.nativeElement;
-      const options = {background:"white",height : docElement.clientHeight , width : docElement.clientWidth  };
-      html2canvas(docElement, options).then(canvas => {
-        // console.log("doing something at least");
-        // console.log(canvas);
-
-        // get image url thing
-        // TODO: imgDataURLList doesn't need to be an object property
-        let imgDataURL = canvas.toDataURL("image/jpeg", 0.2);
-        // console.log("here's the imgDataURL");
-        // console.log(imgDataURL);
-        this.imgDataURLList.push(imgDataURL);
-
-        // put in pdf
-        let canvasWidth = 180;
-        let canvasHeight = canvasWidth * canvas.height / canvas.width;
-        doc.addImage(imgDataURL, 'JPEG', 10, 10, canvasWidth, canvasHeight);
-
-        if (this.numberOfDocsRendered < this.numberOfDocs) {
-          doc.addPage();
-        };
-
-
-
-
-        // doc.output('dataurlnewwindow');
-        //
-        // //  new stuff
-        //   let pdfOutput = doc.output();
-        //   // using ArrayBuffer will allow you to put image inside PDF
-        //   let buffer = new ArrayBuffer(pdfOutput.length);
-        //   let array = new Uint8Array(buffer);
-        //   for (let i = 0; i < pdfOutput.length; i++) {
-        //     array[i] = pdfOutput.charCodeAt(i);
-        //   }
-        //
-        //
-        //   // let file = new realFile;
-        //   //This is where the PDF file will stored , you can change it as you like
-        //   // for more information please visit https://ionicframework.com/docs/native/file/
-        //   const directory = this.file. ;
-        //
-        //   //Name of pdf
-        //   const fileName = "example.pdf";
-        //
-        //   //Writing File to Device
-        //   this.file.writeFile(directory,fileName,buffer)
-        //     .then((success)=> console.log("File created Succesfully" + JSON.stringify(success)))
-        //     .catch((error)=> console.log("Cannot Create File " +JSON.stringify(error)));
-
-        // check if all docs are rendered
-        this.numberOfDocsRendered += 1;
-        if (this.numberOfDocsRendered == this.numberOfDocs) {
-
-
-          let formDataBlob = this.imgDataURLList[0];
-          console.log("here is the blob I'm trying to upload");
-          console.log(formDataBlob);
-          const consent = new Consent(formDataBlob.toString(), 2, 3, 4);
-          console.log("here a result form db");
-          // this.studyDataService.sendConsent(consent).subscribe(db_res => console.log(db_res));
-
-
-          let file = doc.output('datauri');
-          const consentPdf = new Consent(file.toString(), 2, 3, 4);
-          this.studyDataService.sendConsent(consentPdf).subscribe(db_res => console.log(db_res));
-
-
-          let pdfString = doc.output('datauristring');
-
-          let att =  this.generateAttachment(pdfString, "myFileName.pdf")
-
-          this.sendEmail(att);
-
-
-          loading.dismiss();
-        }
-
-      })
-    }
-
-  }
-
-  sendEmail(pdfBase64) {
-
-    let emailOptions = {
-      to: 'rossmichaelm@gmail.com',
-      attachments: [pdfBase64],
-      subject: 'Consent Forms',
-      body: 'Please see the attached consent forms',
-      isHtml: false
-    };
-
-    console.log("trying email2");
-
-
-    this.platform.ready().then(() => {
-      cordova.plugins.email.open(emailOptions);
+    // create docs then send them
+    let allDocsCreated = this.createDocOfImages(this.docPageList);
+    allDocsCreated.then(doc => {
+      const consentPdf = new Consent(doc.output('datauristring'), 2, 3, 4);
+      this.studyDataService.sendConsent(consentPdf).subscribe(db_res => console.log(db_res));
+      if (!this.platform.is('cordova')) {
+        doc.output('dataurlnewwindow');
+      }
+      loading.dismiss();
     })
-
-
   }
 
-   generateAttachment(uriString, fileName){
-    var uristringparts = uriString.split(',');
-    uristringparts[0] = "base64:" + fileName + "//";
-    return uristringparts.join("");
-  };
+  EmailDocs() {
+    // create docs then email them
+    this.createDocOfImages(this.docPageList).then(doc => {
+      if (this.platform.is('cordova')) {
+        this.utils.sendDocViaEmail(this.platform, cordova, doc, 'rossmichaelm@gmail.com');
+      } else {
+        doc.output('dataurlnewwindow');
+      }
+    })
+  }
 
   changeStudyForms() {
     this.navCtrl.push(HomePage);
   }
 
+  trySendFormsToDB() {
+    const alert = this.alertController.create({
+      cssClass: "myAlert",
+      title: '<h3>Do you want to send documents to the database?</h3>',
+      message: '<p>Only click yes if you are a member of staff. <br/><br/> If so, make sure you have checked the form is fully filled in and noted down the PID</p>',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Yes, submit',
+          handler: () => {
+            console.log('Confirm Yes');
+            this.sendDocsToDB();
+          }
+        }
+      ]
+    });
 
+    alert.present();
+  }
 
 
 }
