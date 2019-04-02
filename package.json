@@ -63,7 +63,8 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-file": {},
-      "cordova-wheel-selector-plugin": {}
+      "cordova-wheel-selector-plugin": {},
+      "cordova-plugin-email-composer": {}
     },
     "platforms": [
       "ios"

@@ -12,15 +12,18 @@ import {Form} from "../../models/form";
 import { LoadingController} from "ionic-angular";
 import {HttpClient} from '@angular/common/http';
 import {Consent} from "../../models/consent";
-import {EmailComposer} from "@ionic-native/email-composer/ngx";
+// import {EmailComposer} from "@ionic-native/email-composer/ngx";
 import {HomePage} from "../home/home";
+import { Platform } from 'ionic-angular';
+
+declare var cordova;
 
 
 @IonicPage()
 @Component({
   selector: 'page-documents',
   templateUrl: 'documents.html',
-  providers: [EmailComposer]
+  // providers: [EmailComposer]
 })
 export class DocumentsPage {
   imgDataURLList= [];
@@ -48,8 +51,9 @@ export class DocumentsPage {
     public toastCtrl: ToastController,
     public studyDataService: StudyDataProvider,
     public loadingController: LoadingController,
-    private emailComposer: EmailComposer,
-    private file: realFile
+    // private emailComposer: EmailComposer,
+    private file: realFile,
+    public platform: Platform
   ) {
     this.selectedStudy = navParams.get('selectedStudy');
     this.selectedForms = this.selectedStudy.forms.filter(form => form.selected === true);
@@ -176,36 +180,12 @@ export class DocumentsPage {
           const consentPdf = new Consent(file.toString(), 2, 3, 4);
           this.studyDataService.sendConsent(consentPdf).subscribe(db_res => console.log(db_res));
 
-          //
-          // let email = {
-          //   to: 'rossmichaelm@gmail.com',
-          //   //cc: 'jdnichollsc@hotmail.com',
-          //   //bcc: ['jdnichollsc@hotmail.com'],
-          //   // attachments: [
-          //   //   this.generateAttachment(file, "myFileName.pdf")
-          //   // ],
-          //   subject: 'Mira un PDF!',
-          //   body: 'Abre el PDF creado con jsPDF :)',
-          //   isHtml: true
-          // };
 
-          // let email = {
-          //   to: 'max@mustermann.de',
-          //   cc: 'erika@mustermann.de',
-          //   bcc: ['john@doe.com', 'jane@doe.com'],
-          //   subject: 'Cordova Icons',
-          //   body: 'How are you? Nice greetings from Leipzig',
-          //   isHtml: true
-          // };
-          //
-          // // this.emailComposer.open(email);
-          //
-          // this.emailComposer.isAvailable().then((available: boolean) =>{
-          //   if(available) {
-          //     //Now we know we can send
-          //     this.emailComposer.open(email);
-          //   }
-          // });
+          let pdfString = doc.output('datauristring');
+
+          let att =  this.generateAttachment(pdfString, "myFileName.pdf")
+
+          this.sendEmail(att);
 
 
           loading.dismiss();
@@ -216,39 +196,31 @@ export class DocumentsPage {
 
   }
 
-  sendEmail() {
+  sendEmail(pdfBase64) {
 
-//
-//     let email = {
-//       to: 'max@mustermann.de',
-//       cc: 'erika@mustermann.de',
-//       bcc: ['john@doe.com', 'jane@doe.com'],
-//       // attachments: [
-//       //   'file://img/logo.png',
-//       //   'res://icon.png',
-//       //   'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-//       //   'file://README.pdf'
-//       // ],
-//       subject: 'Cordova Icons',
-//       body: 'How are you? Nice greetings from Leipzig',
-//       isHtml: true
-//     };
-//
-//     // this.emailComposer.open(email);
-//
-//     this.emailComposer.isAvailable().then((available: boolean) =>{
-//       if(available) {
-//
-// // Send a text message using default options
-//         this.emailComposer.open(email);
-//         //Now we know we can send
-//       }
-//     });
-//     this.emailComposer.isAvailable();
+    let emailOptions = {
+      to: 'rossmichaelm@gmail.com',
+      attachments: [pdfBase64],
+      subject: 'Consent Forms',
+      body: 'Please see the attached consent forms',
+      isHtml: false
+    };
 
+    console.log("trying email2");
+
+
+    this.platform.ready().then(() => {
+      cordova.plugins.email.open(emailOptions);
+    })
 
 
   }
+
+   generateAttachment(uriString, fileName){
+    var uristringparts = uriString.split(',');
+    uristringparts[0] = "base64:" + fileName + "//";
+    return uristringparts.join("");
+  };
 
   changeStudyForms() {
     this.navCtrl.push(HomePage);
