@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import { StudiesProvider } from "../../providers/studies/studies";
 import { LoginPage } from "../login/login";
 import { DocumentsPage } from "../documents/documents";
@@ -7,6 +7,7 @@ import { StudyDataProvider} from "../../providers/study-data/study-data";
 import { Slides } from "ionic-angular";
 import {Study} from "../../models/study";
 import {Form} from "../../models/form";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'page-home',
@@ -17,6 +18,9 @@ import {Form} from "../../models/form";
 export class HomePage {
   selectedStudyId: number = -1;
   selectedStudy: Study;
+  user: User;
+  anySelectedForms: Boolean = false;
+  // navParams: NavParams;
   // selectedFormIds = [];
   // selectedForms: Form[];
 
@@ -30,7 +34,21 @@ export class HomePage {
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public studyDataService: StudyDataProvider,
-  ) {}
+    public navParams: NavParams
+  ) {
+    this.user = this.navParams.get('user');
+    console.log("logged in user is: ");
+    console.log(this.user);
+  }
+
+  checkAnySelectedForms() {
+    this.anySelectedForms = false;
+    for (let form of this.selectedStudy.forms) {
+        if (form.selected == true) {
+          this.anySelectedForms = true;
+        }
+    }
+  }
 
   onStudySelection() {
     this.selectedStudy = this.studyDataService.studies.find(study => study.id === +this.selectedStudyId);
@@ -40,26 +58,7 @@ export class HomePage {
 
   }
 
-  // onFormSelection() {
-  //   this.selectedFormIds = this.selectedFormIds.map(formId => +formId);
-  //   this.selectedForms = this.selectedStudy.forms.filter(form => this.selectedFormIds.indexOf(form.form_id) !== -1);
-  //
-  // }
 
-  //
-  // showCurrentForms() {
-  //
-  //   let selectedStudy = this.getSelectedStudy();
-  //   this.studyDataService.getCurrentForms(selectedStudy);
-  //   console.log("showing current forms");
-  //   console.log(selectedStudy);
-  // }
-  //
-  // getSelectedStudy() {
-  //   let activeSlide = this.studySlides.getActiveIndex();
-  //   let activeStudy = this.studyDataService.studies[activeSlide];
-  //   return activeStudy.id;
-  // }
 
   sendEmail() {
 
@@ -87,8 +86,8 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    console.log("ionViewDidLoad")
-    this.studyDataService.getAllStudyFormData();
+    console.log("ionViewDidLoad");
+    this.studyDataService.getAllStudyFormData(String(this.user.id));
     console.log("after get all study form data")
 
     // this.selectedStudyId = this.studyDataService.selectedStudyDP.id;
@@ -100,6 +99,7 @@ export class HomePage {
     console.log(this.selectedStudy);
     this.navCtrl.push(DocumentsPage, {
       'selectedStudy': this.selectedStudy,
+      'user': this.user
       // 'forms': this.
     });
   }

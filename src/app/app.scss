@@ -38,7 +38,7 @@
 #doc-page
 {
   align-content: center;
-  width:720px; /* or whatever width you want. */
+  width:85%; /* or whatever width you want. was 720 px before */
   max-width:100%; /* or whatever width you want. */
   min-height: 800px;
   display: inline-block;
@@ -100,6 +100,13 @@ canvas {
 h3, h2, h1 {
   margin: .5rem !important;
 }
+
+//.swiper-slide {
+//  width: 90% !important;
+//  &:last-child {
+//    width: 100% !important;
+//  }
+//}
 
 ////.myAlert {
 //  .alert-ios .alert-message,

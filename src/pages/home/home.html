@@ -23,7 +23,7 @@
 
   <ion-item>
     <ion-label>Choose Study</ion-label>
-    <ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">
+    <ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection(); checkAnySelectedForms()">
       <ion-option *ngFor="let study of studyDataService.studies" value="{{study.id}}" >{{study.name}}</ion-option>
     </ion-select>
   </ion-item>
@@ -31,55 +31,15 @@
   <ion-list *ngIf="selectedStudyId !== -1">
     <ion-item *ngFor="let form of selectedStudy.forms" >
       <ion-label>{{form.form_title}}</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]="form.selected"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="form.selected" (ngModelChange)="checkAnySelectedForms(); checkAnySelectedForms()"></ion-checkbox>
     </ion-item>
   </ion-list>
 
-  <!--<ion-item *ngIf="selectedStudyId !== -1">-->
-    <!--<ion-label>Choose Forms</ion-label>-->
-    <!--&lt;!&ndash;<ion-select [(ngModel)]="selectedStudyId" (ngModelChange)="onStudySelection()">&ndash;&gt;-->
-    <!--<ion-select multiple="true" [(ngModel)]="selectedFormIds" (ngModelChange)="onFormSelection()">-->
-      <!--<ion-option *ngFor="let form of selectedStudy.forms" value="{{form.form_id}}" >{{form.form_title}}</ion-option>-->
-    <!--</ion-select>-->
-  <!--</ion-item>-->
-
-
-
-  <!--<div style="background-color: whitesmoke">-->
-  <!--<ion-slides #studySlides (ionSlideDidChange)="showCurrentForms()" pager="true">-->
-    <!--<ion-slide *ngFor="let study of studyDataService.studies">-->
-      <!--<div class="swiper-button-prev"></div>-->
-      <!--<ion-card>-->
-        <!--<ion-card-header>-->
-          <!--<ion-card-title text-wrap style="font-size:50px">{{study.name}}</ion-card-title>-->
-        <!--</ion-card-header>-->
-      <!--</ion-card>-->
-      <!--<div class="swiper-button-next"></div>-->
-    <!--</ion-slide>-->
-  <!--</ion-slides>-->
-  <!--</div>-->
 
     <div class="spacer" style="width: 748.333px; height: 0;"></div>
 
   <div padding>
 
-
-    <!--<h1>Which documents?</h1>-->
-
-  <!--<ion-grid>-->
-    <!--<div *ngFor="let formRow of studyDataService.formsView">-->
-      <!--<ion-row>-->
-      <!--<ion-col *ngFor="let form of formRow" col-3>-->
-        <!--<div align="center">-->
-          <!--<img src="https://s3.amazonaws.com/ionic-io-static/VEIXY0urS2u1KhorXUX1_text-document_318-48568.jpg" style=" width: 75%; height: 75%; margin-left: auto; margin-right: auto;" alt="Can't display image">-->
-        <!--</div>-->
-        <!--<div text-center="">-->
-          <!--<h4>{{form.form_title}}</h4>-->
-        <!--</div>-->
-      <!--</ion-col>-->
-      <!--</ion-row>-->
-    <!--</div>-->
-  <!--</ion-grid>-->
 
     <ion-grid>
       <div *ngFor="let form of selectedStudyId.forms">
@@ -97,31 +57,13 @@
 
 
 
-  <!--<h1>Send read-only copy of these documents via email:</h1>-->
-
-  <!--<form (submit)="sendEmail()">-->
-    <!--<ion-row>-->
-      <!--<ion-col col-8>-->
-        <!--<ion-item>-->
-          <!--<ion-label>Email: </ion-label>-->
-          <!--<ion-input type="email" [(ngModel)]="documentEmail" name="email" ></ion-input>-->
-        <!--</ion-item>-->
-      <!--</ion-col>-->
-      <!--<ion-col>-->
-        <!--<button ion-button color="primary" large  block>Send</button>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
-  <!--</form>-->
-
-  <!--<h1>Show these documents to:</h1>-->
-
   <form (submit)="openDocumentsPage()">
     <ion-row>
       <!--<ion-col>-->
         <!--<button  ion-button outline color="primary" large block>Read</button>-->
       <!--</ion-col>-->
       <ion-col>
-        <button ion-button color="primary" large  block>Show Documents</button>
+        <button ion-button color="primary" [disabled]="!anySelectedForms" large  block>Show Documents</button>
       </ion-col>
     </ion-row>
   </form>

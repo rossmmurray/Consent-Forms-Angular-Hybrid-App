@@ -4,8 +4,10 @@ can't write text in safari
 new lines in html
 
 Todo:
-get api and php on same server
-
+put first page after login same as before
+grey out show forms button if none selected
+make login work
+show permissions
 
 use javascript file ionic 3
 

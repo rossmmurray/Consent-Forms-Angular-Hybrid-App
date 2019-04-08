@@ -34,23 +34,21 @@ export class utilities {
 
   addImagePageToDoc(doc: jsPDF, image: HTMLCanvasElement) {
 
-    doc.addPage();
-    let imgDataURL = image.toDataURL("image/jpeg", 0.2);
-    let canvasWidth = 180;
-    let canvasHeight = canvasWidth * image.height / image.width;
-    doc.addImage(imgDataURL, 'JPEG', 10, 10, canvasWidth, canvasHeight);
+    let imageWidth = 180;
+    let imageHeight = imageWidth * image.height / image.width;
+    let a4Ratio = 1.4142;
+    const pageHeight = imageWidth * a4Ratio;
 
-    // doc.output('dataurlnewwindow');
-    //
-    // //  new stuff
-    //   let pdfOutput = doc.output();
-    //   // using ArrayBuffer will allow you to put image inside PDF
-    //   let buffer = new ArrayBuffer(pdfOutput.length);
-    //   let array = new Uint8Array(buffer);
-    //   for (let i = 0; i < pdfOutput.length; i++) {
-    //     array[i] = pdfOutput.charCodeAt(i);
-    //   }
-    //
+    // const pageHeight = doc;
+
+    let imgDataURL = image.toDataURL("image/jpeg", 0.6);
+    doc.addPage();
+    doc.addImage(imgDataURL, 'JPEG', 10, 10, imageWidth, imageHeight);
+
+    if ( (imageHeight > pageHeight)) {
+      doc.addPage();
+      doc.addImage(imgDataURL, 'JPEG', 10, -pageHeight + 10, imageWidth, imageHeight);
+    }
   }
 
 }

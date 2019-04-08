@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import {HomePage} from "../home/home";
 import {DocumentsPage} from "../documents/documents";
 import {StudyDataProvider} from "../../providers/study-data/study-data";
+import {Observable} from "rxjs";
+import {connectableObservableDescriptor} from "rxjs/observable/ConnectableObservable";
+import {User} from "../../models/user";
 
 /**
  * Generated class for the LoginPage page.
@@ -20,8 +23,8 @@ import {StudyDataProvider} from "../../providers/study-data/study-data";
 export class LoginPage {
 
   account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+    email: 'Firsttestemailaddress@pretendemailprovider',
+    password: null
   };
 
   constructor(
@@ -38,17 +41,39 @@ export class LoginPage {
       let toast = this.toastCtrl.create({
         message: "Successful Login with email: " + messageEmail,
         duration: 3000,
-        position: 'top',
+        position: 'bottom',
         cssClass: "myToast"
       });
 
-      toast.present();
+
 
     // this.navCtrl.push(DocumentsPage);
-    this.navCtrl.push(DocumentsPage, {
-      'selectedStudy': this.studyDataService.studies[2],
-      // 'forms': this.
+    let credentialsResultObservable: Observable<any> = this.studyDataService.checkCredentials(this.account.email, this.account.password);
+
+    credentialsResultObservable.subscribe(data => {
+      console.log(data);
+
+      //if unsuccessful
+      if (Object.keys(data).length === 0) {
+        console.log("unsuccessful login");
+        toast.setMessage("Incorrect email or password.");
+        toast.present();
+      //  if successful login
+      } else {
+        console.log("successful login");
+        toast.present();
+        let user = new User(data.user_ID, data.email, data.role);
+        this.navCtrl.push(HomePage, {'user': user})
+      }
     });
+
+
+
+    //
+    // this.navCtrl.push(DocumentsPage, {
+    //   'selectedStudy': this.studyDataService.studies[2],
+    //   // 'forms': this.
+    // });
 
     // this.user.login(this.account).subscribe((resp) => {
     //   this.navCtrl.push(MainPage);

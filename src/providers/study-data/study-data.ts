@@ -35,10 +35,27 @@ export class StudyDataProvider {
     console.log('Hello StudyDataProvider Provider');
   }
 
-  getStudyMetaData() {
+  checkCredentials(email: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // 'Authorization': 'my-auth-token'
+      })
+    };
+
+    let credentialJson = JSON.stringify({
+      email: email,
+      password: password
+    });
+    return this.http.post(this.api_base_url + "/login", credentialJson, httpOptions );
+  }
+
+
+  getStudyMetaData(user_id?: string) {
     // get top level data for all studies
+    user_id = user_id || '';
     this.studies = [];
-    this.http.get(this.api_base_url + "/studies").subscribe(data => {
+    this.http.get(this.api_base_url + "/studies" + "/" + user_id).subscribe(data => {
       // @ts-ignore
       for (let row of data) {
         let study = new Study(row.study_ID, row.study_name, []);
@@ -63,8 +80,9 @@ export class StudyDataProvider {
   };
 
 
-  getAllStudyFormData() {
-    this.getStudyMetaData();
+  getAllStudyFormData(user_id?: string) {
+    user_id  =  user_id || '';
+    this.getStudyMetaData((user_id));
     this.getFormData();
   }
 
@@ -141,9 +159,15 @@ export class StudyDataProvider {
       })
     };
 
+    let myRegex = /.*base64,(.*)/g;
+    let match = myRegex.exec(consent.formData);
+    consent.formData = match[1];
+
     let consentJson = JSON.stringify(consent);
+
     console.log("JSON being sent with post request to api");
     console.log(consentJson);
+
     return this.http.post(this.api_base_url + "/form_html", consentJson, httpOptions )
 
   }
@@ -168,6 +192,8 @@ export class StudyDataProvider {
     }
     this.formsView = StudyDataProvider.getFormLayout(this.currentForms);
   }
+
+
 
 
 

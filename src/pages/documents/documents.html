@@ -30,7 +30,8 @@
 
     <!--<div style="background-color: whitesmoke">-->
     <!--(ionSlideDidChange)="showCurrentForms()"-->
-    <ion-slides #studySlides pager="true" >
+    <!--spaceBetween="-120"-->
+    <ion-slides #studySlides pager="true"  spaceBetween="{{spaceBetweenSlides}}">
       <ion-slide *ngFor="let form of studyDataService.forms_with_html">
 
         <!--start of document page-->
@@ -91,11 +92,11 @@
         <ion-col col-9>
           <ion-item class="consent_input">
             <ion-label position="floating"><h1>Email:</h1></ion-label>
-            <ion-input type="email" name="email"></ion-input>
+            <ion-input type="email" name="email" [(ngModel)]="typedEmail" placeholder="example@email.com"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
-          <button (click)="EmailDocs()" ion-button color="primary" block><h2>Send</h2></button>
+          <button (click)="EmailDocs()" ion-button color="primary" block><h2>Send copy</h2></button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -108,22 +109,11 @@
     <h1 padding >Once you have filled in the forms, please hand the device back to the member of staff. Thank you.</h1>
 
     <form padding-left align="center">
-      <button (click)="trySendFormsToDB()" ion-button color="primary" outline ><h2 padding>(For staff only) Submit All Forms</h2></button>
+      <button text-wrap (click)="trySendFormsToDB()" ion-button color="primary" outline ><h2 padding>(For staff only) Submit All Forms</h2></button>
     </form>
-
-    <!--<div class="my-inline-block" align-items-center>-->
-      <!--<button ion-button color="danger">Go back</button>-->
-      <!--<h3> Note: you will lose you're currently inputted data</h3>-->
-    <!--</div>-->
 
 
   </div>
-
-  <!--<ion-row>-->
-    <!--<ion-col *ngFor="let image of imgDataURLList" width-80>-->
-      <!--<img [src]="image"/>-->
-    <!--</ion-col>-->
-  <!--</ion-row>-->
 
 
 </ion-content>

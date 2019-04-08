@@ -15,6 +15,7 @@ import {HomePage} from "../home/home";
 import {Platform} from 'ionic-angular';
 import {utilities} from "../../shared/utilities";
 import {AlertController} from "ionic-angular";
+import {User} from "../../models/user";
 
 
 declare var cordova;
@@ -32,6 +33,9 @@ export class DocumentsPage {
   selectedForm: Form;
   selectedFormHTML;
   pid: number = 10000000;
+  typedEmail: string = '';
+  spaceBetweenSlides: number = -20;
+  user: User;
 
   @ViewChildren('docPage') docPageList: QueryList<ElementRef>;
   @ViewChild('studySlides') slides: Slides;
@@ -45,12 +49,11 @@ export class DocumentsPage {
     public studyDataService: StudyDataProvider,
     public loadingController: LoadingController,
     public platform: Platform,
-    public alertController: AlertController
+    public alertController: AlertController,
   ) {
     this.selectedStudy = navParams.get('selectedStudy');
+    this.user = navParams.get('user');
     this.selectedForms = this.selectedStudy.forms.filter(form => form.selected === true);
-    // this.selectedForms =
-
     console.log("here are the data from the last page");
     console.log(this.selectedStudy);
     // console.log(this.selectedForms);
@@ -64,6 +67,15 @@ export class DocumentsPage {
     console.log('ionViewDidLoad DocumentsPage');
     this.studyDataService.getStudyFormsSections(String(this.selectedStudy.id), this.selectedForms);
     this.pid = this.generatePid();
+
+    const docPagePercent = 0.8;
+    const docPagePixels = 720;
+    const naturalPixelsBetween = this.platform.width()  * (1-docPagePercent);
+    const closenessFactor = 1.8;
+
+    this.spaceBetweenSlides = -1 * naturalPixelsBetween / closenessFactor;
+    // this.spaceBetweenSlides = -1 * (this.platform.width() - docPagePixels) / 4;
+    // this.spaceBetweenSlides = -100;
 
   }
 
@@ -122,12 +134,22 @@ export class DocumentsPage {
     // create docs then send them
     let allDocsCreated = this.createDocOfImages(this.docPageList);
     allDocsCreated.then(doc => {
-      const consentPdf = new Consent(doc.output('datauristring'), 2, 3, 4);
+      const consentPdf = new Consent(doc.output('datauristring'), this.pid, this.selectedStudy.id, 4);
       this.studyDataService.sendConsent(consentPdf).subscribe(db_res => console.log(db_res));
       if (!this.platform.is('cordova')) {
         doc.output('dataurlnewwindow');
       }
       loading.dismiss();
+
+      let toast = this.toastCtrl.create({
+        message: "Documnets have been sent to remote database",
+        duration: 3000,
+        position: 'middle',
+        cssClass: "myToast"
+      });
+
+      toast.present();
+
     })
   }
 
@@ -135,7 +157,7 @@ export class DocumentsPage {
     // create docs then email them
     this.createDocOfImages(this.docPageList).then(doc => {
       if (this.platform.is('cordova')) {
-        this.utils.sendDocViaEmail(this.platform, cordova, doc, 'rossmichaelm@gmail.com');
+        this.utils.sendDocViaEmail(this.platform, cordova, doc, this.typedEmail);
       } else {
         doc.output('dataurlnewwindow');
       }
@@ -143,7 +165,7 @@ export class DocumentsPage {
   }
 
   changeStudyForms() {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push(HomePage, {'user': this.user});
   }
 
   trySendFormsToDB() {
