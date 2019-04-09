@@ -109,7 +109,7 @@ export class StudyDataProvider {
         let section_display = new FormDisplay(section.content, section.order, section.section_type, section.form_ID);
         // this.forms_with_html[section.]
         // let safe_html = this.sanitizer.bypassSecurityTrustHtml(section_display.html_display);
-        this.section_array[section_display.section_order] = section_display;
+        this.section_array.push(section_display);
       }
       console.log(this.section_array);
 

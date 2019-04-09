@@ -30,6 +30,7 @@
     "@types/html2canvas": "0.0.35",
     "@types/jspdf": "^1.2.2",
     "angular2-signaturepad": "^2.8.0",
+    "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-email-composer": "0.9.2",
@@ -67,7 +68,8 @@
       "cordova-plugin-email-composer": {}
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
