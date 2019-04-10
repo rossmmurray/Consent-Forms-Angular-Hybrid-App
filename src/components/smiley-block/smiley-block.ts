@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 /**
  * Generated class for the SmileyBlockComponent component.

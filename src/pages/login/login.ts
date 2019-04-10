@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import {HomePage} from "../home/home";
-import {DocumentsPage} from "../documents/documents";
 import {StudyDataProvider} from "../../providers/study-data/study-data";
 import {Observable} from "rxjs";
-import {connectableObservableDescriptor} from "rxjs/observable/ConnectableObservable";
 import {User} from "../../models/user";
 
 /**

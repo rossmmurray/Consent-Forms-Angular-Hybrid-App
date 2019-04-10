@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import { SignaturePad } from "angular2-signaturepad/signature-pad";
 import {Storage} from "@ionic/storage";
-import {Slides, ToastController} from "ionic-angular";
+import {ToastController} from "ionic-angular";
 
 
 @Component({

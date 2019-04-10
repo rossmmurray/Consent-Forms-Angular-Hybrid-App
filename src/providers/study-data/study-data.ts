@@ -6,8 +6,6 @@ import {FormDisplay} from "../../models/form-display";
 import {Form} from "../../models/form";
 import {Study} from "../../models/study";
 import { Consent} from "../../models/consent";
-import {Observable} from "rxjs";
-import {catchError} from "rxjs/operators";
 
 
 @Injectable()

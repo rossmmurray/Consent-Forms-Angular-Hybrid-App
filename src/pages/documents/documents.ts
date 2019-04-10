@@ -6,7 +6,6 @@ import {ToastController} from 'ionic-angular';
 
 import * as html2canvas from "html2canvas";
 import * as jsPDF from 'jspdf';
-import {File as realFile} from "@ionic-native/file/ngx";
 import {Study} from "../../models/study";
 import {Form} from "../../models/form";
 import {LoadingController} from "ionic-angular";
@@ -69,7 +68,7 @@ export class DocumentsPage {
     this.pid = this.generatePid();
 
     const docPagePercent = 0.8;
-    const docPagePixels = 720;
+    // const docPagePixels = 720;
     const naturalPixelsBetween = this.platform.width()  * (1-docPagePercent);
     const closenessFactor = 1.8;
 

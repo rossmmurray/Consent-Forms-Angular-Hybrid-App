@@ -6,7 +6,6 @@ import { DocumentsPage } from "../documents/documents";
 import { StudyDataProvider} from "../../providers/study-data/study-data";
 import { Slides } from "ionic-angular";
 import {Study} from "../../models/study";
-import {Form} from "../../models/form";
 import {User} from "../../models/user";
 
 @Component({
