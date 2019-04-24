@@ -36,8 +36,14 @@ export class utilities {
 
     let imageWidth = 180;
     let imageHeight = imageWidth * image.height / image.width;
+
     let a4Ratio = 1.4142;
-    const pageHeight = imageWidth * a4Ratio;
+
+    // let imageHeight = 180 * a4Ratio;
+    // let imageWidth = imageHeight * image.width / image.height;
+
+    // the factor roughly takes into account margins
+    const pageHeight = imageWidth * a4Ratio * 1.15;
 
     // const pageHeight = doc;
 
@@ -45,6 +51,7 @@ export class utilities {
     doc.addPage();
     doc.addImage(imgDataURL, 'JPEG', 10, 10, imageWidth, imageHeight);
 
+    // add extra page
     if ( (imageHeight > pageHeight)) {
       doc.addPage();
       doc.addImage(imgDataURL, 'JPEG', 10, -pageHeight + 10, imageWidth, imageHeight);
