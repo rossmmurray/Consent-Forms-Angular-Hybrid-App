@@ -18,6 +18,7 @@ export class StudyDataProvider {
   testFormHTML: any = [];
   safeTestFormHTML: SafeHtml;
   safeTestScriptHTML: SafeScript;
+  // api_base_url = "http://localhost:3003";
   api_base_url = "https://designteam14consentapi.azurewebsites.net";
   allSections: any = [];
   section_array: FormDisplay[] = [];
