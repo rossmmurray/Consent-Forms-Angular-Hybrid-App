@@ -1,6 +1,6 @@
-# Informed Consent Cross-Platform App
+# Informed Consent Hybrid Tablet App
 
-This project created a hybrid app for Android/ iOS built using Angular + Ionic. The app allows forms to be shown to and filled out by the end-user and sent to the backend via a REST API.
+This project created a hybrid app for Android/ iOS built using Angular, Ionic and Typescript. The app allows forms to be shown to and filled out by the end-user and sent to the backend via a REST API.
 
 Login page: 
 
